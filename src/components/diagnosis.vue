@@ -4,10 +4,15 @@
     <div class="diagnosis-selection">
       <h3>筛选项</h3>
       <div>
-
         <div class="diagnosis-selection-account">
-          <el-radio v-model="radio" label="account">指定账户</el-radio>
-          <el-select v-model="account">
+          <el-radio
+            v-model="radio"
+            label="account"
+          >指定账户</el-radio>
+          <el-select
+            v-model="account"
+            :disabled="radio==='client'"
+          >
             <el-option
               label="名称"
               value="name"
@@ -18,15 +23,21 @@
             ></el-option>
           </el-select>
           <el-input
+            :disabled="radio==='client'"
             v-model="accountInput"
             placeholder="请输入"
           ></el-input>
-
         </div>
 
         <div class="diagnosis-selection-client">
-          <el-radio v-model="radio" label="client">指定客户</el-radio>
-          <el-select v-model="client">
+          <el-radio
+            v-model="radio"
+            label="client"
+          >指定客户</el-radio>
+          <el-select
+            v-model="client"
+            :disabled="radio==='account'"
+          >
             <el-option
               label="名称"
               value="name"
@@ -37,78 +48,94 @@
             ></el-option>
           </el-select>
           <el-input
-            v-model="accountClient"
+            :disabled="radio==='account'"
+            v-model="clientInput"
             placeholder="请输入"
           ></el-input>
         </div>
 
-      <div class="diagnosis-selection-date">
-        <el-select v-model="date">
-          <el-option
-            label="按日"
-            value="day"
-          ></el-option>
-          <el-option
-            label="按周"
-            value="week"
-          ></el-option>
-          <el-option
-            label="按月"
-            value="month"
-          ></el-option>
-        </el-select>
-        <el-date-picker
-          v-if="date === 'day'"
-          v-model="day"
-          type="date"
-        ></el-date-picker>
-        <el-date-picker
-          v-if="date === 'week'"
-          v-model="week"
-          type="week"
-        ></el-date-picker>
-        <el-date-picker
-          v-if="date === 'month'"
-          v-model="month"
-          type="month"
-        ></el-date-picker>
-      </div>
-      <div class="diagnosis-selection-btn">
-      <el-button type="primary">查询</el-button>
-      </div>
+        <div class="diagnosis-selection-date">
+          <el-select v-model="date">
+            <el-option
+              label="按日"
+              value="day"
+            ></el-option>
+            <el-option
+              label="按周"
+              value="week"
+            ></el-option>
+            <el-option
+              label="按月"
+              value="month"
+            ></el-option>
+          </el-select>
+          <el-date-picker
+            v-if="date === 'day'"
+            v-model="day"
+            type="date"
+          ></el-date-picker>
+          <el-date-picker
+            v-if="date === 'week'"
+            v-model="week"
+            type="week"
+          ></el-date-picker>
+          <el-date-picker
+            v-if="date === 'month'"
+            v-model="month"
+            type="month"
+          ></el-date-picker>
+        </div>
+        <div class="diagnosis-selection-btn">
+          <el-button
+            type="primary"
+            @click="searchDiagnosis"
+          >查询</el-button>
+        </div>
       </div>
     </div>
-    <div class="diagnosis-account" v-if="radio==='account'">
+    <div class="diagnosis-account">
       <div class="diagnosis-account-detail">
         <h3 class="diagnosis-account-detail-title">详情</h3>
         <div class="diagnosis-account-detail-data-message">
-          <div class="account-account-table-message">
-            <span>账户名称：账户一</span>
+          <div
+            class="diagnosis-account-detail-table-message"
+            v-if="radio==='account'"
+          >
+            <span>账户名称：{{accountName}}</span>
           </div>
-          <div class="account-account-table-message">
-            <span>账户ID：23232323</span>
+          <div
+            class="diagnosis-account-detail-table-message"
+            v-if="radio==='account'"
+          >
+            <span>账户ID：{{accountId}}</span>
           </div>
-          <div class="account-account-table-message">
-            <span>客户名称：客户一</span>
+          <div
+            class="diagnosis-account-detail-table-message"
+            v-if="radio==='client'"
+          >
+            <span>客户名称：{{clientName}}</span>
           </div>
-          <div class="account-account-table-message">
-            <span>客户ID：4545454545</span>
+          <div
+            class="diagnosis-account-detail-table-message"
+            v-if="radio==='client'"
+          >
+            <span>客户ID：{{clientId}}</span>
           </div>
           <br />
-          <div class="account-account-table-message">
-            <span>账户状态：正常</span>
+          <div class="diagnosis-account-detail-table-message">
+            <span>账户状态：{{accountStatus}}</span>
           </div>
-          <div class="account-account-table-message">
-            <span>账户余额：30988.00元</span>
+          <div class="diagnosis-account-detail-table-message">
+            <span>账户余额：{{balance}}元</span>
           </div>
-          <div class="account-account-table-message">
-            <span>余额可消耗天数：4天</span>
+          <div class="diagnosis-account-detail-table-message">
+            <span>余额可消耗天数：{{balanceLastDay}}天</span>
           </div>
-          <div class="account-account-table-message">
-            <span>今日消耗：88.00元</span>
+          <div class="diagnosis-account-detail-table-message">
+            <span>今日消耗：{{todayPay}}元</span>
           </div>
-          <div class="account-account-table-message">
-            <span>账户日预算：不限</span>
+          <div class="diagnosis-account-detail-table-message">
+            <span>账户日预算：{{budget}}</span>
           </div>
         </div>
       </div>
@@ -138,66 +165,6 @@
         </div>
       </div>
     </div>
-    <div class="diagnosis-client-detail" v-if="radio==='client'">
-      <div class="diagnosis-client-detail-data">
-        <h3 class="diagnosis-client-detail-title">详情</h3>
-        <div class="diagnosis-client-detail-data-message">
-          <div class="account-detail-table-message">
-            <span>账户名称：账户二</span>
-          </div>
-          <div class="account-detail-table-message">
-            <span>账户ID：23232323</span>
-          </div>
-          <div class="account-detail-table-message">
-            <span>客户名称：客户一</span>
-          </div>
-          <div class="account-detail-table-message">
-            <span>客户ID：4545454545</span>
-          </div>
-          <br />
-          <div class="account-detail-table-message">
-            <span>账户状态：正常</span>
-          </div>
-          <div class="account-detail-table-message">
-            <span>账户余额：30988.00元</span>
-          </div>
-          <div class="account-detail-table-message">
-            <span>余额可消耗天数：4天</span>
-          </div>
-          <div class="account-detail-table-message">
-            <span>今日消耗：88.00元</span>
-          </div>
-          <div class="account-detail-table-message">
-            <span>账户日预算：不限</span>
-          </div>
-        </div>
-      </div>
-      <div class="diagnosis-client-detail-result">
-        <h3 class="diagnosis-client-detail-result-title">诊断结果</h3>
-        <div class="diagnosis-client-detail-result-message">
-          <div class="diagnosis-client-detail-result-account">
-            <div>
-            <i class="el-icon-warning"></i>
-            <span>账户</span>
-            </div>
-          </div>
-          <div class="diagnosis-client-detail-result-promote">
-            <div>
-              <i class="el-icon-warning"></i>
-              <span>推广组</span>
-            </div>
-            <el-button type="primary">下载详情</el-button>
-          </div>
-          <div class="diagnosis-client-detail-result-word">
-            <div>
-              <i class="el-icon-warning"></i>
-              <span>关键词</span>
-            </div>
-            <el-button type="primary">下载详情</el-button>
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
 </template>
 <script>
@@ -208,7 +175,16 @@ export default {
       account: '',
       client: '',
       accountInput: '',
-      accountClient: '',
+      clientInput: '',
+      accountName: '',
+      accountId: '',
+      clientName: '',
+      clientId: '',
+      accountStatus: '',
+      balance: '',
+      balanceLastDay: 0,
+      todayPay: '',
+      budget: '',
       date: 'day',
       day: '',
       week: '',
@@ -224,92 +200,86 @@ export default {
       console.log("radio", val)
     },
   },
+
   methods: {
+    //查询函数
+    searchDiagnosis () {
+      let params = {
+
+      }
+      if (this.radio === 'account') {
+        params.diagnosisType = 'account'
+        params.diagnosisMethod = this.account
+        params.diagnosisId = this.accountInput
+      } else {
+        params.diagnosisType = 'client'
+        params.diagnosisMethod = this.client
+        params.diagnosisId = this.clientInput
+      }
+
+      this.$axios.get('https://www.fastmock.site/mock/0b492904d3072f00705b34b0d2204207/account/diagnosis', params).then(res => {
+        console.log("diagnosisType", res)
+        if (res.status === 200) {
+          if (res.data.code === '200') {
+            this.accountName = res.data.result.accountName
+            this.accountId = res.data.result.accountId
+            this.clientName = res.data.result.clientName
+            this.clientId = res.data.result.clientId
+            this.accountStatus = res.data.result.accountStatus
+            this.balance = res.data.result.balance
+            this.balanceLastDay = res.data.result.balanceLastDay
+            this.todayPay = res.data.result.todayPay
+            this.budget = res.data.result.budget
+          }
+        } else {
+          console.log("获取接口失败")
+        }
+      })
+    }
 
   }
 };
 </script>
 <style lang="scss">
 .diagnosis {
-  p{
+  p {
     text-align: left;
   }
   padding: 24px;
   &-selection {
     text-align: left;
     display: flex;
-    h3{
+    h3 {
       width: 120px;
       text-align: left;
     }
-    &-btn{
+    &-btn {
       text-align: right;
     }
     &-client,
-    &-account{
+    &-account {
       display: flex;
       align-items: baseline;
       margin-bottom: 16px;
-      .el-select{
+      .el-select {
         margin-right: 30px;
       }
     }
-    &-date{
+    &-date {
       margin-bottom: 16px;
-      .el-select{
+      .el-select {
         margin-right: 30px;
       }
     }
   }
-  &-client {
-    &-detail {
-      &-data {
-          display: flex;
-          align-items: baseline;
-          h3{
-            width: 120px;
-            text-align: left;
-          }
-        &-message {
-          display: flex;
-        }
-      }
-      &-title {
-        width: 120px;
-      }
-      &-result {
-        h3{
-          width: 120px;
-          text-align: left;
-        }
-        &-message {
-          width: 100%;
-        }
-        width: 100%;
-        display: flex;
-        align-items: baseline;
-        text-align: left;
-        &-account,
-        &-promote,
-        &-word {
-          display: flex;
-          width: 100%;
-          justify-content: space-between;
-          margin-bottom: 16px;
-          i {
-            color: red;
-          }
-        }
-      }
-    }
-  }
+
   &-account {
     &-detail {
       display: flex;
       flex-direction: row;
       align-items: baseline;
       width: 100%;
-      h3{
+      h3 {
         width: 120px;
         text-align: left;
       }
@@ -317,19 +287,28 @@ export default {
         width: 120px;
       }
       &-data {
-        h3{
+        h3 {
           width: 120px;
           text-align: left;
         }
-        &-message{
+        &-message {
           display: flex;
+          flex-wrap: wrap;
         }
       }
+      &-table{
+        &-message{
+          width: 256px;
+    margin-bottom: 8px;
+    text-align: left;
+        }
+      }
+
     }
     &-data {
       display: flex;
       align-items: baseline;
-       h3{
+      h3 {
         width: 120px;
         text-align: left;
       }
