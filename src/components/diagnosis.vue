@@ -55,34 +55,10 @@
         </div>
 
         <div class="diagnosis-selection-date">
-          <el-select v-model="date">
-            <el-option
-              label="按日"
-              value="day"
-            ></el-option>
-            <el-option
-              label="按周"
-              value="week"
-            ></el-option>
-            <el-option
-              label="按月"
-              value="month"
-            ></el-option>
-          </el-select>
+          <span style="margin-right:42px">选择时间</span>
           <el-date-picker
-            v-if="date === 'day'"
-            v-model="day"
+            v-model="dateString"
             type="date"
-          ></el-date-picker>
-          <el-date-picker
-            v-if="date === 'week'"
-            v-model="week"
-            type="week"
-          ></el-date-picker>
-          <el-date-picker
-            v-if="date === 'month'"
-            v-model="month"
-            type="month"
           ></el-date-picker>
         </div>
         <div class="diagnosis-selection-btn">
@@ -126,16 +102,16 @@
             <span>账户状态：{{accountStatus}}</span>
           </div>
           <div class="diagnosis-account-detail-table-message">
-            <span>账户余额：{{balance}}元</span>
+            <span>账户余额：{{accountAmount}}元</span>
           </div>
           <div class="diagnosis-account-detail-table-message">
-            <span>余额可消耗天数：{{balanceLastDay}}天</span>
+            <span>余额可消耗天数：{{consumeDays}}天</span>
           </div>
           <div class="diagnosis-account-detail-table-message">
-            <span>今日消耗：{{todayPay}}元</span>
+            <span>今日消耗：{{opDate}}元</span>
           </div>
           <div class="diagnosis-account-detail-table-message">
-            <span>账户日预算：{{budget}}</span>
+            <span>账户日预算：{{count}}</span>
           </div>
         </div>
       </div>
@@ -148,6 +124,7 @@
               <span>账户</span>
             </div>
           </div>
+          <p class="diagnosis-account-data-result-tip">您的账户在2019年10月18日，由于XX原因，已违规，请及时处理</p>
           <div class="diagnosis-account-data-result-promote">
             <div>
               <i class="el-icon-warning"></i>
@@ -155,6 +132,9 @@
             </div>
             <el-button type="primary">下载详情</el-button>
           </div>
+          <p
+            class="diagnosis-account-data-result-tip"
+          >系统检测到您目前有5个(15%)无效推广组，其中3个未添加物料，1个物料审核未通过，一个物料暂停，建议您及时修改</p>
           <div class="diagnosis-account-data-result-word">
             <div>
               <i class="el-icon-warning"></i>
@@ -162,12 +142,19 @@
             </div>
             <el-button type="primary">下载详情</el-button>
           </div>
+          <p
+            class="diagnosis-account-data-result-tip"
+          >1，系统检测到您目前有50个(15%)关键词暂停，其中有48个为行业活跃词，建议您重新开启关键词</p>
+          <p
+            class="diagnosis-account-data-result-tip"
+          >2，系统检测到您目前有32个(15%)有展现无点击的关键词平均展现量为40000，其中17个由于创意相关性较差，15个由于关键性排名较低没有形成点击，建议您及时修改</p>
         </div>
       </div>
     </div>
   </div>
 </template>
 <script>
+import moment from 'moment';
 export default {
   data () {
     return {
@@ -181,55 +168,52 @@ export default {
       clientName: '',
       clientId: '',
       accountStatus: '',
-      balance: '',
-      balanceLastDay: 0,
-      todayPay: '',
-      budget: '',
-      date: 'day',
-      day: '',
-      week: '',
-      month: ''
+      accountAmount: '',
+      consumeDays: 0,
+      opDate: '',
+      count: '',
+      dateString: '',
+      diagramType: ''
     };
   },
   //监听数据变化
   watch: {
-    userSelection (val) {
-      console.log("userSelection", val)
-    },
-    radio (val) {
-      console.log("radio", val)
+    dateString (val) {
+      console.log("dateString", moment(val).format('YYYY-MM-DD'))
     },
   },
 
   methods: {
     //查询函数
     searchDiagnosis () {
-      let params = {
-
-      }
+      let params = {}
       if (this.radio === 'account') {
-        params.diagnosisType = 'account'
-        params.diagnosisMethod = this.account
-        params.diagnosisId = this.accountInput
+        if (this.account === 'name') {
+          params.accountName = this.accountInput
+        } else {
+          params.accountId = this.accountInput
+        }
       } else {
-        params.diagnosisType = 'client'
-        params.diagnosisMethod = this.client
-        params.diagnosisId = this.clientInput
+        if (this.client === 'name') {
+          params.customName = this.clientInput
+        } else {
+          params.customId = this.clientInput
+        }
       }
+      params.dateString = moment(this.dateString).format('YYYY-MM-DD')
 
-      this.$axios.get('https://www.fastmock.site/mock/0b492904d3072f00705b34b0d2204207/account/diagnosis', params).then(res => {
-        console.log("diagnosisType", res)
+      this.$axios.post('https://www.fastmock.site/mock/0b492904d3072f00705b34b0d2204207/account/diagnosis/select', params).then(res => {
         if (res.status === 200) {
           if (res.data.code === '200') {
-            this.accountName = res.data.result.accountName
-            this.accountId = res.data.result.accountId
-            this.clientName = res.data.result.clientName
-            this.clientId = res.data.result.clientId
-            this.accountStatus = res.data.result.accountStatus
-            this.balance = res.data.result.balance
-            this.balanceLastDay = res.data.result.balanceLastDay
-            this.todayPay = res.data.result.todayPay
-            this.budget = res.data.result.budget
+            this.accountName = res.data.data.accountInfo.accountName
+            this.accountId = res.data.data.accountInfo.accountId
+            this.clientName = res.data.data.accountInfo.clientName
+            this.clientId = res.data.data.accountInfo.clientId
+            this.accountStatus = res.data.data.accountInfo.accountStatus ? '正常' : '非正常'
+            this.accountAmount = res.data.data.accountInfo.accountAmount || 0
+            this.consumeDays = res.data.data.accountInfo.consumeDays || 0
+            this.opDate = res.data.data.accountResult.opDate || 0
+            this.count = res.data.data.accountResult.count || 0
           }
         } else {
           console.log("获取接口失败")
@@ -296,14 +280,14 @@ export default {
           flex-wrap: wrap;
         }
       }
-      &-table{
-        &-message{
+      &-table {
+        &-message {
           width: 256px;
-    margin-bottom: 8px;
-    text-align: left;
+          margin-bottom: 8px;
+          text-align: left;
+          margin-right: 16px;
         }
       }
-
     }
     &-data {
       display: flex;
@@ -318,10 +302,13 @@ export default {
         &-account,
         &-promote,
         &-word {
+          border: 1px solid #dcdfe6;
           display: flex;
           width: 100%;
           justify-content: space-between;
           margin-bottom: 16px;
+          padding: 6px 8px;
+          align-items: center;
           i {
             color: red;
           }
