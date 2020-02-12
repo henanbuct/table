@@ -2,7 +2,7 @@
   <div class="diagnosis">
     <p class="diagnosis-tip">温馨提示：目前“诊断结果”仅支持输出“账户问题，无效推广组，暂停关键词，有展现无点击关键词”，余下功能正在努力搭建中，敬请期待！</p>
     <div class="diagnosis-selection">
-      <h3>筛选项</h3>
+      <h4>筛选项</h4>
       <div>
         <div class="diagnosis-selection-account">
           <el-radio
@@ -71,31 +71,43 @@
     </div>
     <div class="diagnosis-account">
       <div class="diagnosis-account-detail">
-        <h3 class="diagnosis-account-detail-title">详情</h3>
+        <h4 class="diagnosis-account-detail-title">详情</h4>
         <div class="diagnosis-account-detail-data-message">
           <div
             class="diagnosis-account-detail-table-message"
             v-if="radio==='account'"
           >
-            <span>账户名称：{{accountName}}</span>
+            <p>
+              账户名称：
+              <span @click="linkAccountName">{{accountName}}</span>
+            </p>
           </div>
           <div
             class="diagnosis-account-detail-table-message"
             v-if="radio==='account'"
           >
-            <span>账户ID：{{accountId}}</span>
+            <p>
+              账户ID：
+              <span @click="linkAccountId">{{accountId}}</span>
+            </p>
           </div>
           <div
             class="diagnosis-account-detail-table-message"
             v-if="radio==='client'"
           >
-            <span>客户名称：{{clientName}}</span>
+            <p>
+              客户名称：
+              <span @click="linkClientName">{{clientName}}</span>
+            </p>
           </div>
           <div
             class="diagnosis-account-detail-table-message"
             v-if="radio==='client'"
           >
-            <span>客户ID：{{clientId}}</span>
+            <p>
+              客户ID：
+              <span @click="linkClientId">{{clientId}}</span>
+            </p>
           </div>
           <br />
           <div class="diagnosis-account-detail-table-message">
@@ -116,7 +128,7 @@
         </div>
       </div>
       <div class="diagnosis-account-data">
-        <h3>诊断结果</h3>
+        <h4>诊断结果</h4>
         <div class="diagnosis-account-data-result">
           <div class="diagnosis-account-data-result-account">
             <div>
@@ -200,7 +212,7 @@ export default {
           params.customId = this.clientInput
         }
       }
-      params.dateString = moment(this.dateString).format('YYYY-MM-DD')
+      params.dateString = this.dateString ? moment(this.dateString).format('YYYY-MM-DD') : ''
 
       this.$axios.post('https://www.fastmock.site/mock/0b492904d3072f00705b34b0d2204207/account/diagnosis/select', params).then(res => {
         if (res.status === 200) {
@@ -219,8 +231,23 @@ export default {
           console.log("获取接口失败")
         }
       })
-    }
-
+    },
+    linkAccountName () {
+      this.$emit('activeNameDiagnosis', 'account');
+      this.$router.push('account')
+    },
+    linkAccountId () {
+      this.$emit('activeNameDiagnosis', 'account');
+      this.$router.push('account')
+    },
+    linkClientName () {
+      this.$emit('activeNameDiagnosis', 'client');
+      this.$router.push('client')
+    },
+    linkClientId () {
+      this.$emit('activeNameDiagnosis', 'client');
+      this.$router.push('client')
+    },
   }
 };
 </script>
@@ -233,7 +260,7 @@ export default {
   &-selection {
     text-align: left;
     display: flex;
-    h3 {
+    > h4 {
       width: 120px;
       text-align: left;
     }
@@ -263,15 +290,13 @@ export default {
       flex-direction: row;
       align-items: baseline;
       width: 100%;
-      h3 {
+      h4 {
         width: 120px;
         text-align: left;
       }
-      &-title {
-        width: 120px;
-      }
+
       &-data {
-        h3 {
+        h4 {
           width: 120px;
           text-align: left;
         }
@@ -282,17 +307,22 @@ export default {
       }
       &-table {
         &-message {
-          width: 256px;
           margin-bottom: 8px;
           text-align: left;
-          margin-right: 16px;
+          margin-right: 32px;
+          p {
+            margin: 0;
+            span {
+              color: #409eff;
+            }
+          }
         }
       }
     }
     &-data {
       display: flex;
       align-items: baseline;
-      h3 {
+      h4 {
         width: 120px;
         text-align: left;
       }
@@ -312,6 +342,11 @@ export default {
           i {
             color: red;
           }
+        }
+        &-tip {
+          font-size: 12px;
+          margin-top: 0px;
+          margin-bottom: 16px;
         }
       }
     }

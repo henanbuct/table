@@ -789,11 +789,15 @@ export default {
     this.getAccountDetail()
   },
   methods: {
+    //分页
+    handlePageChange () {
+      console.log("分页操作")
+    },
     //获取账户接口
     getAccountDetail () {
 
       this.$axios.get('https://www.fastmock.site/mock/0b492904d3072f00705b34b0d2204207/account/detail').then(res => {
-        console.log("++++this+++", res)
+
         if (res.status === 200) {
           if (res.data.code === '200') {
             this.accountName = res.data.result.accountName

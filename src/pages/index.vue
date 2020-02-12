@@ -18,9 +18,18 @@
       ></el-tab-pane>
     </el-tabs>
     <div class="tab-content">
-      <Diagnosis v-if="activeName==='diagnosis'"></Diagnosis>
-      <Account v-if="activeName==='account'"></Account>
-      <Client v-if="activeName==='client'"></Client>
+      <Diagnosis
+        v-if="activeName==='diagnosis'"
+        @activeNameDiagnosis="activeNameDiagnosis"
+      ></Diagnosis>
+      <Account
+        v-if="activeName==='account'"
+        :activeNameAccount="activeNameAccount"
+      ></Account>
+      <Client
+        v-if="activeName==='client'"
+        :activeNameClient="activeNameClient"
+      ></Client>
     </div>
   </div>
 </template>
@@ -43,9 +52,20 @@ export default {
       activeName: 'diagnosis'
     };
   },
+
   methods: {
+    activeNameDiagnosis (val) {
+      this.activeName = val
+    },
+    activeNameAccount (val) {
+      this.activeName = val
+    },
+    activeNameClient (val) {
+      this.activeName = val
+    },
     handleClick (tab, event) {
-      this.activeName = tab.paneName
+      // this.activeName = tab.paneName
+      this.$router.push({ name: tab.paneName })
     }
   }
 };
