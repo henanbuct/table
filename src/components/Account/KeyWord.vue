@@ -1,0 +1,307 @@
+<template>
+  <div class="account-keyWord">
+    <div class="account-keyWord-detail">
+      <p class="account-keyWord-detail-title">关键词：</p>
+      <div class="account-keyWord-detail-promote">
+        <p>
+          有消耗>
+          <span>3</span>/10
+        </p>
+        <p>
+          消耗下降 >
+          <span>3</span>/10
+        </p>
+        <p>
+          有展现无点击 >
+          <span>3</span>/10
+        </p>
+        <p>
+          无展现 >
+          <span>1</span>/10
+        </p>
+        <p>
+          审核未通过 >
+          <span>1</span>/10
+        </p>
+        <p>
+          无效 >
+          <span>1</span>/10
+        </p>
+        <p>
+          暂停 >
+          <span>1</span>/10
+        </p>
+      </div>
+    </div>
+    <div class="account-keyWord-content">
+      <div class="account-keyWord-content-table">
+        <div class="account-keyWord-content-table-btn">
+          <el-select
+            v-model="keyWordStatus"
+            placeholder="请选择状态"
+          >
+            <el-option
+              v-for="item in keyWordOptions"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+            ></el-option>
+          </el-select>
+          <el-button
+            type="primary"
+            size="small"
+          >下载</el-button>
+        </div>
+        <div class="aaccount-keyWord-content-table-data">
+          <el-table
+            :data="keyWordData"
+            border
+            style="width: 100%"
+            size="small"
+          >
+            <el-table-column
+              prop="keyword"
+              label="关键词"
+              min-width="100"
+            ></el-table-column>
+            <el-table-column
+              prop="planName"
+              label="推广计划"
+              min-width="100"
+            ></el-table-column>
+            <el-table-column
+              prop="groupName"
+              label="推广组"
+            ></el-table-column>
+            <el-table-column
+              prop="status"
+              label="状态"
+            ></el-table-column>
+            <el-table-column
+              prop="channelsManager"
+              label="昨日是否有负向操作"
+            ></el-table-column>
+            <el-table-column
+              prop="channelsManager"
+              label="昨日流量是否下降"
+            ></el-table-column>
+            <el-table-column
+              prop="businessManager"
+              label="原因"
+            ></el-table-column>
+            <el-table-column
+              prop="businessManager"
+              label="匹配"
+            ></el-table-column>
+            <el-table-column
+              prop="state"
+              label="出价"
+            ></el-table-column>
+            <el-table-column
+              prop="state"
+              label="计算机起价"
+            ></el-table-column>
+            <el-table-column
+              prop="state"
+              label="移动起价"
+            ></el-table-column>
+            <el-table-column
+              prop="state"
+              label="暂停时间"
+            ></el-table-column>
+            <el-table-column
+              prop="state"
+              label="展现量"
+            ></el-table-column>
+            <el-table-column
+              prop="state"
+              label="计算机质量度"
+            ></el-table-column>
+            <el-table-column
+              prop="state"
+              label="移动质量度"
+            ></el-table-column>
+            <el-table-column
+              prop="budget"
+              label="展现量"
+              min-width="80"
+            ></el-table-column>
+            <el-table-column
+              prop="budget"
+              label="平均排名"
+              min-width="80"
+            ></el-table-column>
+            <el-table-column
+              prop="budget"
+              label="搜索总量"
+              min-width="80"
+            ></el-table-column>
+            <el-table-column
+              prop="budget"
+              label="本期消耗/元"
+              min-width="80"
+            ></el-table-column>
+            <el-table-column
+              prop="budget"
+              label="上期消耗/元"
+              min-width="80"
+            ></el-table-column>
+            <el-table-column
+              prop="budget"
+              label="下降金额/元"
+              min-width="80"
+            ></el-table-column>
+            <el-table-column
+              prop="budget"
+              label="增长率"
+              min-width="80"
+            ></el-table-column>
+            <el-table-column
+              prop="budget"
+              label="竞品是否投放"
+              min-width="80"
+            ></el-table-column>
+            <el-table-column
+              prop="default_url"
+              label="默认访问url"
+              min-width="80"
+            ></el-table-column>
+            <el-table-column
+              prop="wx_url"
+              label="移动访问url"
+              min-width="80"
+            ></el-table-column>
+          </el-table>
+        </div>
+        <el-pagination
+          background
+          layout="prev, pager, next"
+          :current-page.sync="curPage"
+          :page-size="pageSize"
+          :total="total"
+          size="small"
+          @current-change="handlePageChange"
+        ></el-pagination>
+      </div>
+    </div>
+  </div>
+</template>
+<script>
+export default {
+  data () {
+    return {
+      status: '',
+      keyWordOptions: [],
+      keyWordData: [],
+      curPage: 1,
+      pageSize: 3,
+      total: 0,
+    }
+  },
+  mounted () {
+    this.keyWordOptions = [
+      {
+        label: '有消耗',
+        value: '有消耗'
+      },
+      {
+        label: '消耗下降',
+        value: '消耗下降'
+      },
+      {
+        label: '有展现无点击',
+        value: '有展现无点击'
+      },
+      {
+        label: '无展现',
+        value: '无展现'
+      },
+      {
+        label: '审核未通过',
+        value: '审核未通过'
+      },
+      {
+        label: '无效',
+        value: '无效'
+      },
+      {
+        label: '暂停',
+        value: '暂停'
+      }
+    ];
+    this.getAccountPlan();
+  },
+  methods: {
+    //分页
+    handlePageChange (val) {
+      this.curPage = val;
+      this.getAccountPlan();
+    },
+    //查询函数
+    getAccountPlan () {
+      let params = {
+        status: '',
+        page: this.curPage
+      }
+
+      this.$axios.post('https://www.fastmock.site/mock/0b492904d3072f00705b34b0d2204207/account/account/selectKeyword', params).then(res => {
+        console.log("???keyWordData??", res)
+        if (res.status === 200) {
+          if (res.data.code === 0) {
+            this.total = res.data.total
+            this.keyWordData = res.data.data && res.data.data.length > 0 ? res.data.data : []
+          }
+        } else {
+          console.log("获取接口失败")
+        }
+      })
+    }
+  }
+}
+</script>
+<style scoped lang="scss">
+.account-keyWord {
+  display: flex;
+  flex-direction: column;
+  &-detail {
+    align-items: baseline;
+    display: flex;
+    &-title {
+      font-size: 24px;
+      font-weight: 500;
+      width: 176px;
+      text-align: left;
+    }
+    &-promote {
+      display: flex;
+      flex-wrap: wrap;
+      p {
+        margin-right: 24px;
+        margin-top: 0px;
+        margin-bottom: 8px;
+      }
+    }
+  }
+  &-content {
+    &-table {
+      &-btn {
+        text-align: right;
+        margin-bottom: 8px;
+      }
+      &-data {
+        .el-table {
+          th {
+            background-color: #409eff;
+          }
+        }
+      }
+      .el-pagination {
+        text-align: right;
+        margin-top: 8px;
+      }
+    }
+  }
+}
+</style>
+<style lang="scss">
+</style>

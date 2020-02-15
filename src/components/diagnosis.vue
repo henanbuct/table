@@ -120,10 +120,10 @@
             <span>余额可消耗天数：{{consumeDays}}天</span>
           </div>
           <div class="diagnosis-account-detail-table-message">
-            <span>今日消耗：{{opDate}}元</span>
+            <span>今日消耗：{{todayConsume}}元</span>
           </div>
           <div class="diagnosis-account-detail-table-message">
-            <span>账户日预算：{{count}}</span>
+            <span>账户日预算：{{accountDailyBudget}}</span>
           </div>
         </div>
       </div>
@@ -182,17 +182,12 @@ export default {
       accountStatus: '',
       accountAmount: '',
       consumeDays: 0,
-      opDate: '',
-      count: '',
+      todayConsume: '',
+      accountDailyBudget: '',
       dateString: '',
-      diagramType: ''
+      diagramType: '',
+      accountInfo: {}
     };
-  },
-  //监听数据变化
-  watch: {
-    dateString (val) {
-      console.log("dateString", moment(val).format('YYYY-MM-DD'))
-    },
   },
 
   methods: {
@@ -215,8 +210,9 @@ export default {
       params.dateString = this.dateString ? moment(this.dateString).format('YYYY-MM-DD') : ''
 
       this.$axios.post('https://www.fastmock.site/mock/0b492904d3072f00705b34b0d2204207/account/diagnosis/select', params).then(res => {
+
         if (res.status === 200) {
-          if (res.data.code === '200') {
+          if (res.data.code === 0) {
             this.accountName = res.data.data.accountInfo.accountName
             this.accountId = res.data.data.accountInfo.accountId
             this.clientName = res.data.data.accountInfo.clientName
@@ -224,8 +220,9 @@ export default {
             this.accountStatus = res.data.data.accountInfo.accountStatus ? '正常' : '非正常'
             this.accountAmount = res.data.data.accountInfo.accountAmount || 0
             this.consumeDays = res.data.data.accountInfo.consumeDays || 0
-            this.opDate = res.data.data.accountResult.opDate || 0
-            this.count = res.data.data.accountResult.count || 0
+            this.todayConsume = res.data.data.accountInfo.todayConsume || 0
+            this.accountDailyBudget = res.data.data.accountInfo.accountDailyBudget || 0
+            this.accountInfo = res.data.data.accountInfo
           }
         } else {
           console.log("获取接口失败")
@@ -234,7 +231,7 @@ export default {
     },
     linkAccountName () {
       this.$emit('activeNameDiagnosis', 'account');
-      this.$router.push('account')
+      this.$router.push({ name: 'account', params: this.accountInfo })
     },
     linkAccountId () {
       this.$emit('activeNameDiagnosis', 'account');
@@ -256,7 +253,6 @@ export default {
   p {
     text-align: left;
   }
-  padding: 24px;
   &-selection {
     text-align: left;
     display: flex;

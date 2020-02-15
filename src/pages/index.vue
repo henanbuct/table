@@ -1,6 +1,7 @@
 <template>
   <div class="tab">
     <el-tabs
+      size="big"
       v-model="activeName"
       @tab-click="handleClick"
     >
@@ -70,3 +71,8 @@ export default {
   }
 };
 </script>
+<style scoped lang="scss">
+.tab {
+  padding: 0 64px;
+}
+</style>
