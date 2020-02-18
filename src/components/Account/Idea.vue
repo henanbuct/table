@@ -130,7 +130,7 @@ export default {
       ideaOptions: [],
       ideaData: [],
       curPage: 1,
-      pageSize: 3,
+      pageSize: 10,
       total: 0,
     }
   },
@@ -160,12 +160,12 @@ export default {
     //查询函数
     getAccountIdea () {
       let params = {
-        status: '',
-        page: this.curPage
+        status: this.status,
+        page: this.curPage,
+        pageSize: this.pageSize
       }
 
-      this.$axios.post('https://www.fastmock.site/mock/0b492904d3072f00705b34b0d2204207/account/account/selectIdea', params).then(res => {
-        console.log("?????", res)
+      this.$axios.post('/account/analysis/account/selectIdea', params).then(res => {
         if (res.status === 200) {
           if (res.data.code === 0) {
             this.total = res.data.total

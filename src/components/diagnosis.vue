@@ -136,7 +136,9 @@
               <span>账户</span>
             </div>
           </div>
-          <p class="diagnosis-account-data-result-tip">您的账户在2019年10月18日，由于XX原因，已违规，请及时处理</p>
+          <p
+            class="diagnosis-account-data-result-tip"
+          >您的账户在accountResult.opDate，由于您的账户在accountResult.count原因，已违规，请及时处理</p>
           <div class="diagnosis-account-data-result-promote">
             <div>
               <i class="el-icon-warning"></i>
@@ -146,7 +148,7 @@
           </div>
           <p
             class="diagnosis-account-data-result-tip"
-          >系统检测到您目前有5个(15%)无效推广组，其中3个未添加物料，1个物料审核未通过，一个物料暂停，建议您及时修改</p>
+          >系统检测到您目前有{{groupPauseNumber}}个({{groupInvalidRate}}%)无效推广组，其中{{groupInvalidKeywordNumber}}个未添加物料，{{groupInvalidIdeaNumber}}个物料审核未通过，一个物料暂停，建议您及时修改</p>
           <div class="diagnosis-account-data-result-word">
             <div>
               <i class="el-icon-warning"></i>
@@ -156,10 +158,7 @@
           </div>
           <p
             class="diagnosis-account-data-result-tip"
-          >1，系统检测到您目前有50个(15%)关键词暂停，其中有48个为行业活跃词，建议您重新开启关键词</p>
-          <p
-            class="diagnosis-account-data-result-tip"
-          >2，系统检测到您目前有32个(15%)有展现无点击的关键词平均展现量为40000，其中17个由于创意相关性较差，15个由于关键性排名较低没有形成点击，建议您及时修改</p>
+          >2，系统检测到您目前有{{keywordShowUnClickNumber}}个({{keywordShowUnClickRate}}%)有展现无点击的关键词平均展现量为{{keywordAvgPv}}，其中{{keywordIdeaNumber}}个由于创意相关性较差，{{keywordRankNumber}}个由于关键性排名较低没有形成点击，建议您及时修改</p>
         </div>
       </div>
     </div>
@@ -186,7 +185,18 @@ export default {
       accountDailyBudget: '',
       dateString: '',
       diagramType: '',
-      accountInfo: {}
+      accountInfo: {},
+      totalPauseNumber: '',
+      activeNumber: '',
+      keywordShowUnClickNumber: '',
+      keywordShowUnClickRate: '',
+      keywordAvgPv: '',
+      keywordIdeaNumber: '',
+      keywordRankNumber: '',
+      groupPauseNumber: '',
+      groupInvalidRate: '',
+      groupInvalidKeywordNumber: '',
+      groupInvalidIdeaNumber: ''
     };
   },
 
@@ -209,7 +219,7 @@ export default {
       }
       params.dateString = this.dateString ? moment(this.dateString).format('YYYY-MM-DD') : ''
 
-      this.$axios.post('https://www.fastmock.site/mock/0b492904d3072f00705b34b0d2204207/account/diagnosis/select', params).then(res => {
+      this.$axios.post('/account/analysis/diagnosis/select', params).then(res => {
 
         if (res.status === 200) {
           if (res.data.code === 0) {
@@ -223,6 +233,19 @@ export default {
             this.todayConsume = res.data.data.accountInfo.todayConsume || 0
             this.accountDailyBudget = res.data.data.accountInfo.accountDailyBudget || 0
             this.accountInfo = res.data.data.accountInfo
+
+            this.totalPauseNumber = res.data.data.diagnosisKeyword.totalPauseNumber
+            this.activeNumber = res.data.data.diagnosisKeyword.activeNumber
+            this.keywordShowUnClickNumber = res.data.data.diagnosisKeyword.keywordShowUnClickNumber
+            this.keywordShowUnClickRate = res.data.data.diagnosisKeyword.keywordShowUnClickRate
+            this.keywordAvgPv = res.data.data.diagnosisKeyword.accountDailkeywordAvgPvyBudget
+            this.keywordIdeaNumber = res.data.data.diagnosisKeyword.keywordIdeaNumber
+            this.keywordRankNumber = res.data.data.diagnosisKeyword.keywordRankNumber
+
+            this.groupPauseNumber = res.data.data.diagnosisGroup.keywordRankNumber
+            this.groupInvalidRate = res.data.data.diagnosisGroup.keywordRankNumber
+            this.groupInvalidKeywordNumber = res.data.data.diagnosisGroup.keywordRankNumber
+            this.groupInvalidIdeaNumber = res.data.data.diagnosisGroup.keywordRankNumber
           }
         } else {
           console.log("获取接口失败")
