@@ -97,7 +97,7 @@
           >
             <p>
               客户名称：
-              <span @click="linkClientName">{{clientName}}</span>
+              <span @click="linkClientName">{{customName}}</span>
             </p>
           </div>
           <div
@@ -106,7 +106,7 @@
           >
             <p>
               客户ID：
-              <span @click="linkClientId">{{clientId}}</span>
+              <span @click="linkClientId">{{customId}}</span>
             </p>
           </div>
           <br />
@@ -176,8 +176,8 @@ export default {
       clientInput: '',
       accountName: '',
       accountId: '',
-      clientName: '',
-      clientId: '',
+      customName: '',
+      customId: '',
       accountStatus: '',
       accountAmount: '',
       consumeDays: 0,
@@ -219,14 +219,14 @@ export default {
       }
       params.dateString = this.dateString ? moment(this.dateString).format('YYYY-MM-DD') : ''
 
-      this.$axios.post('/account/analysis/diagnosis/select', params).then(res => {
-
+      this.$axios.post('https://www.fastmock.site/mock/0b492904d3072f00705b34b0d2204207/account/diagnosis/select', params).then(res => {
+        console.log("3434434", res)
         if (res.status === 200) {
           if (res.data.code === 0) {
             this.accountName = res.data.data.accountInfo.accountName
             this.accountId = res.data.data.accountInfo.accountId
-            this.clientName = res.data.data.accountInfo.clientName
-            this.clientId = res.data.data.accountInfo.clientId
+            this.customName = res.data.data.accountInfo.customName
+            this.customId = res.data.data.accountInfo.customId
             this.accountStatus = res.data.data.accountInfo.accountStatus ? '正常' : '非正常'
             this.accountAmount = res.data.data.accountInfo.accountAmount || 0
             this.consumeDays = res.data.data.accountInfo.consumeDays || 0
@@ -254,19 +254,19 @@ export default {
     },
     linkAccountName () {
       this.$emit('activeNameDiagnosis', 'account');
-      this.$router.push({ name: 'account', params: this.accountInfo })
+      this.$router.push({ name: 'account', params: { accountInfo: this.accountInfo, accountName: this.accountInfo.accountName } })
     },
     linkAccountId () {
       this.$emit('activeNameDiagnosis', 'account');
-      this.$router.push('account')
+      this.$router.push({ name: 'account', params: { accountInfo: this.accountInfo, accountId: this.accountInfo.accountId } })
     },
     linkClientName () {
       this.$emit('activeNameDiagnosis', 'client');
-      this.$router.push('client')
+      this.$router.push({ name: 'client', params: { accountInfo: this.accountInfo, customName: this.accountInfo.customName } })
     },
     linkClientId () {
       this.$emit('activeNameDiagnosis', 'client');
-      this.$router.push('client')
+      this.$router.push({ name: 'client', params: { accountInfo: this.accountInfo, customId: this.accountInfo.customId } })
     },
   }
 };

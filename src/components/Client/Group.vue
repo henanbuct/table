@@ -96,6 +96,9 @@
 </template>
 <script>
 export default {
+  props: {
+    client: Object
+  },
   data () {
     return {
       status: '',
@@ -136,6 +139,13 @@ export default {
         page: this.curPage,
         pageSize: this.pageSize
       }
+
+      if (this.client.customName) {
+        params.customName = this.client.customName
+      } else {
+        params.customId = this.client.customId
+      }
+
 
       this.$axios.post('/account/analysis/custom/selectGroup', params).then(res => {
         if (res.status === 200) {

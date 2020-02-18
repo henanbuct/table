@@ -114,6 +114,9 @@
 
 <script>
 export default {
+  props: {
+    client: Object
+  },
   data () {
     return {
       status: '',
@@ -153,6 +156,12 @@ export default {
         status: this.status,
         page: this.curPage,
         pageSize: this.pageSize
+      }
+
+      if (this.client.customName) {
+        params.customName = this.client.customName
+      } else {
+        params.customId = this.client.customId
       }
 
       this.$axios.post('/account/analysis/custom/selectAccount', params).then(res => {

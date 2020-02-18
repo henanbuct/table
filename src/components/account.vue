@@ -33,12 +33,12 @@
         </div>
       </div>
     </div>
-    <Plan></Plan>
-    <Group></Group>
-    <KeyWord></KeyWord>
-    <SearchWord></SearchWord>
-    <Idea></Idea>
-    <Style></Style>
+    <Plan v-bind:account="account"></Plan>
+    <Group v-bind:account="account"></Group>
+    <KeyWord v-bind:account="account"></KeyWord>
+    <SearchWord v-bind:account="account"></SearchWord>
+    <Idea v-bind:account="account"></Idea>
+    <Style v-bind:account="account"></Style>
   </div>
 </template>
 <script>
@@ -63,35 +63,29 @@ export default {
       accountId: '',
       clientName: '',
       clientId: '',
-      accountData: [],
+      accountData: {},
       accountStatus: '',
       accountAmount: '',
       consumeDays: 0,
       todayConsume: '',
       accountDailyBudget: '',
+      account: {}
     };
   },
-  //监听数据变化
-  watch: {
-    hightStyleStatus (val) {
-      console.log("????", val)
-    },
-    createStatus (val) {
-      console.log("????", val)
-    }
-  },
-  created () {
-    this.accountName = this.$route.params.accountName || ''
-    this.accountId = this.$route.params.accountId || ''
-    this.clientName = this.$route.params.clientName || ''
-    this.clientId = this.$route.params.clientId || ''
-    this.accountStatus = this.$route.params.accountStatus ? '正常' : '非正常'
-    this.accountAmount = this.$route.params.accountAmount || 0
-    this.consumeDays = this.$route.params.consumeDays || 0
-    this.todayConsume = this.$route.params.todayConsume || 0
-    this.accountDailyBudget = this.$route.params.accountDailyBudget || 0
-  },
 
+  created () {
+    this.accountData = this.$route.params.accountInfo
+    this.account = this.$route.params
+    this.accountName = this.$route.params.accountInfo.accountName || ''
+    this.accountId = this.$route.params.accountInfo.accountId || ''
+    this.clientName = this.$route.params.accountInfo.clientName || ''
+    this.clientId = this.$route.params.accountInfo.clientId || ''
+    this.accountStatus = this.$route.params.accountInfo.accountStatus ? '正常' : '非正常'
+    this.accountAmount = this.$route.params.accountInfo.accountAmount || 0
+    this.consumeDays = this.$route.params.accountInfo.consumeDays || 0
+    this.todayConsume = this.$route.params.accountInfo.todayConsume || 0
+    this.accountDailyBudget = this.$route.params.accountInfo.accountDailyBudget || 0
+  },
 };
 </script>
 <style scoped lang="scss">

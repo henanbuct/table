@@ -124,6 +124,9 @@
 </template>
 <script>
 export default {
+  props: {
+    account: Object
+  },
   data () {
     return {
       status: '',
@@ -163,6 +166,12 @@ export default {
         status: this.status,
         page: this.curPage,
         pageSize: this.pageSize
+      }
+
+      if (this.account.accountName) {
+        params.accountName = this.account.accountName
+      } else {
+        params.accountId = this.account.accountId
       }
 
       this.$axios.post('/account/analysis/account/selectIdea', params).then(res => {
