@@ -119,6 +119,11 @@ export default {
       total: 0,
     }
   },
+  watch: {
+    status (val) {
+      this.getAccountIdea();
+    }
+  },
   mounted () {
     this.getAccountIdea();
   },

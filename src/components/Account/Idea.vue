@@ -137,6 +137,11 @@ export default {
       total: 0,
     }
   },
+  watch: {
+    status (val) {
+      this.getAccountGroup()
+    }
+  },
   mounted () {
     this.ideaOptions = [
       {

@@ -127,6 +127,11 @@ export default {
       total: 0,
     }
   },
+  watch: {
+    status (val) {
+      this.getClientAccount();
+    }
+  },
   mounted () {
     this.accountOptions = [
       {
