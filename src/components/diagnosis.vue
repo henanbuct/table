@@ -247,10 +247,9 @@ export default {
             this.keywordIdeaNumber = res.data.data.diagnosisKeyword.keywordIdeaNumber
             this.keywordRankNumber = res.data.data.diagnosisKeyword.keywordRankNumber
 
-            this.groupPauseNumber = res.data.data.diagnosisGroup.keywordRankNumber
-            this.groupInvalidRate = res.data.data.diagnosisGroup.keywordRankNumber
-            this.groupInvalidKeywordNumber = res.data.data.diagnosisGroup.keywordRankNumber
-            this.groupInvalidIdeaNumber = res.data.data.diagnosisGroup.keywordRankNumber
+            this.groupInvalidRate = res.data.data.diagnosisGroup.groupInvalidRate
+            this.groupInvalidKeywordNumber = res.data.data.diagnosisGroup.groupInvalidKeywordNumber
+            this.groupInvalidIdeaNumber = res.data.data.diagnosisGroup.groupInvalidIdeaNumber
           }
         } else {
           console.log("获取接口失败")
