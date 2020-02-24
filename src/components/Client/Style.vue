@@ -70,50 +70,62 @@
               label="样式总量"
             ></el-table-column>
             <el-table-column
+              v-if="status==='计算机皇冠列表'"
               prop="pcCrownListNum"
               label="计算机皇冠列表量"
             ></el-table-column>
             <el-table-column
+              v-if="status==='计算机皇冠列表'"
               prop="pcCrownListRate"
               label="计算机皇冠列表覆盖率"
             ></el-table-column>
             <el-table-column
+              v-if="status==='移动皇冠列表'"
               prop="wxCrownListNum"
               label="移动皇冠列表量"
             ></el-table-column>
             <el-table-column
+              v-if="status==='移动皇冠列表'"
               prop="wxCrownListRate"
               label="移动皇冠列表覆盖率"
             ></el-table-column>
             <el-table-column
+              v-if="status==='计算机皇冠通用词'"
               prop="pcCrownGeneralWordNum"
               label="计算机皇冠通用词量"
             ></el-table-column>
             <el-table-column
+              v-if="status==='计算机皇冠通用词'"
               prop="pcCrownGeneralWordRate"
               label="计算机皇冠通用词覆盖率"
             ></el-table-column>
             <el-table-column
+              v-if="status==='移动皇冠通用词'"
               prop="wxCrownGeneralWordNum"
               label="移动皇冠通用词量"
             ></el-table-column>
             <el-table-column
+              v-if="status==='移动皇冠通用词'"
               prop="wxCrownGeneralWordRate"
               label="移动皇冠通用词覆盖率"
             ></el-table-column>
             <el-table-column
+              v-if="status==='计算机皇冠超级样式'"
               prop="pcSuperCrownStyleNum"
               label="计算机皇冠超级样式量"
             ></el-table-column>
             <el-table-column
+              v-if="status==='计算机皇冠超级样式'"
               prop="pcSuperCrownStyleRate"
               label="计算机皇冠超级样式覆盖率"
             ></el-table-column>
             <el-table-column
+              v-if="status==='移动皇冠超级样式'"
               prop="wxSuperCrownStyleNum"
               label="移动皇冠超级样式量"
             ></el-table-column>
             <el-table-column
+              v-if="status==='移动皇冠超级样式'"
               prop="wxSuperCrownStyleRate"
               label="移动皇冠超级样式覆盖率"
             ></el-table-column>

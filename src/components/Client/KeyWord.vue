@@ -42,7 +42,7 @@
       <div class="client-keyWord-content-table">
         <div class="client-keyWord-content-table-btn">
           <el-select
-            v-model="keyWordStatus"
+            v-model="status"
             placeholder="请选择状态"
           >
             <el-option
@@ -79,30 +79,37 @@
               label="关键词总量"
             ></el-table-column>
             <el-table-column
+              v-if="status==='有消耗'"
               prop="cost_num"
               label="有消耗"
             ></el-table-column>
             <el-table-column
+              v-if="status==='消耗下降'"
               prop="cost_decrease_num"
-              label="消费下降"
+              label="消耗下降"
             ></el-table-column>
             <el-table-column
+              v-if="status==='有展现无点击'"
               prop="show_unclick_num"
               label="有展现无点击"
             ></el-table-column>
             <el-table-column
+              v-if="status==='无展现'"
               prop="unshow_num"
               label="无展现"
             ></el-table-column>
             <el-table-column
+              v-if="status==='审核未通过'"
               prop="check_fail_num"
               label="审核未通过"
             ></el-table-column>
             <el-table-column
+              v-if="status==='无效'"
               prop="invalid_num"
               label="无效"
             ></el-table-column>
             <el-table-column
+              v-if="status==='暂停'"
               prop="pause_num"
               label="暂停"
             ></el-table-column>
@@ -138,6 +145,7 @@ export default {
   },
   watch: {
     status (val) {
+      console.log(">>>>>>", this.status)
       this.getAccountPlan();
     }
   },
@@ -195,7 +203,6 @@ export default {
       }
 
       this.$axios.post('/account/analysis/custom/selectKeyword', params).then(res => {
-        console.log("???keyWordData??", res)
         if (res.status === 200) {
           if (res.data.code === 0) {
             this.total = res.data.total

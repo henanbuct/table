@@ -68,14 +68,17 @@
               max-width="80"
             ></el-table-column>
             <el-table-column
+              v-if="status==='暂停'"
               prop="pause_num"
               label="暂停"
             ></el-table-column>
             <el-table-column
+              v-if="status==='无有效关键词'"
               prop="invalid_keyword_num"
               label="无有效关键词"
             ></el-table-column>
             <el-table-column
+              v-if="status==='无有效创意'"
               prop="invalid_idea_num"
               label="无有效创意"
             ></el-table-column>

@@ -219,7 +219,7 @@ export default {
       }
       params.dateString = this.dateString ? moment(this.dateString).format('YYYY-MM-DD') : ''
 
-      this.$axios.post('https://www.fastmock.site/mock/0b492904d3072f00705b34b0d2204207/account/diagnosis/select', params).then(res => {
+      this.$axios.post('/account/analysis/diagnosis/select', params).then(res => {
         console.log("3434434", res)
         if (res.status === 200) {
           if (res.data.code === 0) {

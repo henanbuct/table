@@ -79,9 +79,9 @@
               min-width="40"
             ></el-table-column>
             <el-table-column
-              prop="reason"
+              prop="checkfail_num"
               min-width="70"
-              label="checkfail_num"
+              label="审核未通过"
             ></el-table-column>
 
             <el-table-column

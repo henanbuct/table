@@ -71,10 +71,12 @@
               label="计划总量"
             ></el-table-column>
             <el-table-column
+              v-if="status==='计划预算不足'"
               prop="budget_num"
               label="计划预算不足"
             ></el-table-column>
             <el-table-column
+              v-if="status==='暂停'"
               prop="pause_num"
               label="暂停"
             ></el-table-column>
@@ -110,6 +112,7 @@ export default {
   },
   watch: {
     status (val) {
+      console.log("}}}}}", this.status)
       this.getAccountPlan();
     }
   },
@@ -146,7 +149,7 @@ export default {
         params.customId = this.client.customId
       }
 
-      this.$axios.post('/account/analysis/custom/selectPlan', params).then(res => {
+      this.$axios.post('account/analysis/custom/selectPlan', params).then(res => {
         if (res.status === 200) {
           if (res.data.code === 0) {
             this.total = res.data.total
