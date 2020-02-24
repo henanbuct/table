@@ -138,7 +138,7 @@
           </div>
           <p
             class="diagnosis-account-data-result-tip"
-          >您的账户在accountResult.opDate，由于您的账户在accountResult.count原因，已违规，请及时处理</p>
+          >您的账户在{{opDate}}，由于您的账户在{{description}}原因，已违规，请及时处理</p>
           <div class="diagnosis-account-data-result-promote">
             <div>
               <i class="el-icon-warning"></i>
@@ -196,7 +196,9 @@ export default {
       groupPauseNumber: '',
       groupInvalidRate: '',
       groupInvalidKeywordNumber: '',
-      groupInvalidIdeaNumber: ''
+      groupInvalidIdeaNumber: '',
+      description: '',
+      opDate: ''
     };
   },
 
@@ -233,6 +235,9 @@ export default {
             this.todayConsume = res.data.data.accountInfo.todayConsume || 0
             this.accountDailyBudget = res.data.data.accountInfo.accountDailyBudget || 0
             this.accountInfo = res.data.data.accountInfo
+
+            this.opDate = res.data.data.accountResult.opDate || ''
+            this.description = res.data.data.accountResult.description || ''
 
             this.totalPauseNumber = res.data.data.diagnosisKeyword.totalPauseNumber
             this.activeNumber = res.data.data.diagnosisKeyword.activeNumber
