@@ -1,34 +1,34 @@
 <template>
   <div class="client-style">
     <div class="client-style-detail">
-      <p class="client-style-detail-title">高级样式：</p>
-      <div class="client-style-detail-promote">
-        <p>
-          计算机皇冠列表>
-          <span>3</span>/10
-        </p>
-        <p>
-          移动皇冠列表 >
-          <span>3</span>/10
-        </p>
-        <p>
-          计算机皇冠通用词 >
-          <span>3</span>/10
-        </p>
+      <p class="client-style-detail-title">高级样式</p>
+      <!--<div class="client-style-detail-promote">-->
+        <!--<p>-->
+          <!--计算机皇冠列表>-->
+          <!--<span>3</span>/10-->
+        <!--</p>-->
+        <!--<p>-->
+          <!--移动皇冠列表 >-->
+          <!--<span>3</span>/10-->
+        <!--</p>-->
+        <!--<p>-->
+          <!--计算机皇冠通用词 >-->
+          <!--<span>3</span>/10-->
+        <!--</p>-->
 
-        <p>
-          移动皇冠通用词 >
-          <span>1</span>/10
-        </p>
-        <p>
-          计算机超级皇冠样式 >
-          <span>1</span>/10
-        </p>
-        <p>
-          移动超级皇冠样式 >
-          <span>1</span>/10
-        </p>
-      </div>
+        <!--<p>-->
+          <!--移动皇冠通用词 >-->
+          <!--<span>1</span>/10-->
+        <!--</p>-->
+        <!--<p>-->
+          <!--计算机超级皇冠样式 >-->
+          <!--<span>1</span>/10-->
+        <!--</p>-->
+        <!--<p>-->
+          <!--移动超级皇冠样式 >-->
+          <!--<span>1</span>/10-->
+        <!--</p>-->
+      <!--</div>-->
     </div>
     <div class="client-style-content">
       <div class="client-style-content-table">
@@ -151,7 +151,7 @@ export default {
   },
   data () {
     return {
-      status: '',
+      status: null,
       styleOptions: [],
       styleData: [],
       curPage: 1,

@@ -1,34 +1,34 @@
 <template>
   <div class="client-idea">
     <div class="client-idea-detail">
-      <p class="client-idea-detail-title">创意：</p>
-      <div class="client-idea-detail-promote">
-        <p>
-          消费中创意>
-          <span>3</span>/10
-        </p>
-        <p>
-          有展现无点击创意 >
-          <span>3</span>/10
-        </p>
-        <p>
-          无展现创意 >
-          <span>3</span>/10
-        </p>
+      <p class="client-idea-detail-title">创意</p>
+      <!--<div class="client-idea-detail-promote">-->
+        <!--<p>-->
+          <!--消费中创意>-->
+          <!--<span>3</span>/10-->
+        <!--</p>-->
+        <!--<p>-->
+          <!--有展现无点击创意 >-->
+          <!--<span>3</span>/10-->
+        <!--</p>-->
+        <!--<p>-->
+          <!--无展现创意 >-->
+          <!--<span>3</span>/10-->
+        <!--</p>-->
 
-        <p>
-          审核中创意 >
-          <span>1</span>/10
-        </p>
-        <p>
-          审核未通过创意 >
-          <span>1</span>/10
-        </p>
-        <p>
-          暂停创意 >
-          <span>1</span>/10
-        </p>
-      </div>
+        <!--<p>-->
+          <!--审核中创意 >-->
+          <!--<span>1</span>/10-->
+        <!--</p>-->
+        <!--<p>-->
+          <!--审核未通过创意 >-->
+          <!--<span>1</span>/10-->
+        <!--</p>-->
+        <!--<p>-->
+          <!--暂停创意 >-->
+          <!--<span>1</span>/10-->
+        <!--</p>-->
+      <!--</div>-->
     </div>
     <div class="client-idea-content">
       <div class="client-idea-content-table">
@@ -111,7 +111,7 @@ export default {
   },
   data () {
     return {
-      status: '',
+      status: null,
       ideaOptions: [],
       ideaData: [],
       curPage: 1,

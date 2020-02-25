@@ -1,33 +1,33 @@
 <template>
   <div class="client-plan">
     <div class="client-plan-detail">
-      <p class="client-plan-detail-title">计划：</p>
-      <div class="client-plan-detail-promote">
-        <p>
-          投放中计划 >
-          <span>3</span>/10
-        </p>
-        <p>
-          账户预算不足计划 >
-          <span>3</span>/10
-        </p>
-        <p>
-          计划预算不足计划 >
-          <span>3</span>/10
-        </p>
-        <p>
-          不在投放时段计划 >
-          <span>0</span>/10
-        </p>
-        <p>
-          暂停计划 >
-          <span>1</span>/10
-        </p>
-        <p>
-          无效计划 >
-          <span>1</span>/10
-        </p>
-      </div>
+      <p class="client-plan-detail-title">计划</p>
+      <!--<div class="client-plan-detail-promote">-->
+        <!--<p>-->
+          <!--投放中计划 >-->
+          <!--<span>3</span>/10-->
+        <!--</p>-->
+        <!--<p>-->
+          <!--账户预算不足计划 >-->
+          <!--<span>3</span>/10-->
+        <!--</p>-->
+        <!--<p>-->
+          <!--计划预算不足计划 >-->
+          <!--<span>3</span>/10-->
+        <!--</p>-->
+        <!--<p>-->
+          <!--不在投放时段计划 >-->
+          <!--<span>0</span>/10-->
+        <!--</p>-->
+        <!--<p>-->
+          <!--暂停计划 >-->
+          <!--<span>1</span>/10-->
+        <!--</p>-->
+        <!--<p>-->
+          <!--无效计划 >-->
+          <!--<span>1</span>/10-->
+        <!--</p>-->
+      <!--</div>-->
     </div>
 
     <div class="client-plan-content">
@@ -102,7 +102,7 @@ export default {
   },
   data () {
     return {
-      status: '',
+      status: null,
       planOptions: [],
       planData: [],
       curPage: 1,

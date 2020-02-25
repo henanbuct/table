@@ -56,12 +56,24 @@
               label="原因"
             ></el-table-column>
             <el-table-column
+              v-if="status==='计划预算不足'"
               prop="first_time"
               label="第一次撞线"
             ></el-table-column>
             <el-table-column
+              v-if="status==='计划预算不足'"
               prop="last_time"
               label="最后一次撞线"
+            ></el-table-column>
+            <el-table-column
+              v-if="status==='暂停'"
+              prop="first_time"
+              label="第一次暂停"
+            ></el-table-column>
+            <el-table-column
+              v-if="status==='暂停'"
+              prop="last_time"
+              label="最后一次暂停"
             ></el-table-column>
             <el-table-column
               prop="yesterday_cost"
@@ -99,7 +111,7 @@ export default {
   },
   data () {
     return {
-      status: '',
+      status: null,
       planOptions: [],
       planData: [],
       curPage: 1,
@@ -123,6 +135,7 @@ export default {
         value: '暂停'
       }
     ];
+    this.status = 'status';
     this.getAccountPlan();
   },
   methods: {

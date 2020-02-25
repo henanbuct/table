@@ -1,30 +1,30 @@
 <template>
   <div class="client-group">
     <div class="client-group-detail">
-      <p class="client-group-detail-title">推广组：</p>
-      <div class="client-group-detail-promote">
-        <p>
-          投放中推广组 >
-          <span>3</span>/10
-        </p>
-        <p>
-          账户预算不足推广组 >
-          <span>3</span>/10
-        </p>
-        <p>
-          计划预算不足推广组 >
-          <span>3</span>/10
-        </p>
+      <p class="client-group-detail-title">推广组</p>
+      <!--<div class="client-group-detail-promote">-->
+        <!--<p>-->
+          <!--投放中推广组 >-->
+          <!--<span>3</span>/10-->
+        <!--</p>-->
+        <!--<p>-->
+          <!--账户预算不足推广组 >-->
+          <!--<span>3</span>/10-->
+        <!--</p>-->
+        <!--<p>-->
+          <!--计划预算不足推广组 >-->
+          <!--<span>3</span>/10-->
+        <!--</p>-->
 
-        <p>
-          暂停推广组 >
-          <span>1</span>/10
-        </p>
-        <p>
-          无效推广组 >
-          <span>1</span>/10
-        </p>
-      </div>
+        <!--<p>-->
+          <!--暂停推广组 >-->
+          <!--<span>1</span>/10-->
+        <!--</p>-->
+        <!--<p>-->
+          <!--无效推广组 >-->
+          <!--<span>1</span>/10-->
+        <!--</p>-->
+      <!--</div>-->
     </div>
     <div class="client-group-content">
       <div class="client-group-content-table">
@@ -104,7 +104,7 @@ export default {
   },
   data () {
     return {
-      status: '',
+      status: null,
       groupOptions: [],
       groupData: [],
       curPage: 1,

@@ -63,15 +63,17 @@
               label="原因"
             ></el-table-column>
             <el-table-column
+              v-if="status==='暂停'"
               prop="firstTime"
               label="第一次暂停时间"
             ></el-table-column>
             <el-table-column
+              v-if="status==='暂停'"
               prop="lastTime"
               label="最后一次暂停时间"
             ></el-table-column>
             <el-table-column
-              prop="budgetDay"
+              prop="yesterdayCost"
               label="当前消耗/元"
             ></el-table-column>
             <el-table-column
@@ -101,7 +103,7 @@ export default {
   },
   data () {
     return {
-      status: '',
+      status: null,
       groupOptions: [],
       groupData: [],
       curPage: 1,

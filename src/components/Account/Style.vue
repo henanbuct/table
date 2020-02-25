@@ -115,7 +115,7 @@ export default {
   },
   data () {
     return {
-      status: '',
+      status: null,
       styleOptions: [],
       styleData: [],
       curPage: 1,

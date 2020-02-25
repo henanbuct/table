@@ -1,17 +1,17 @@
 <template>
   <div class="client-search">
     <div class="client-search-detail">
-      <p class="client-search-detail-title">搜索词：</p>
-      <div class="client-search-detail-promote">
-        <p>
-          已购买搜索词>
-          <span>30</span>/340
-        </p>
-        <p>
-          未购买搜索词 >
-          <span>320</span>/340
-        </p>
-      </div>
+      <p class="client-search-detail-title">搜索词</p>
+      <!--<div class="client-search-detail-promote">-->
+        <!--<p>-->
+          <!--已购买搜索词>-->
+          <!--<span>30</span>/340-->
+        <!--</p>-->
+        <!--<p>-->
+          <!--未购买搜索词 >-->
+          <!--<span>320</span>/340-->
+        <!--</p>-->
+      <!--</div>-->
     </div>
     <div class="client-search-content">
       <div class="client-search-content-table">
@@ -85,7 +85,7 @@ export default {
   },
   data () {
     return {
-      status: '',
+      status: null,
       searchOptions: [],
       searchData: [],
       curPage: 1,

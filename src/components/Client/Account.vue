@@ -1,29 +1,29 @@
 <template>
   <div class="client-account">
     <div class="client-account-detail">
-      <p class="client-account-detail-title">账户：</p>
-      <div class="client-account-detail-promote">
-        <p>
-          昨日撞线账户 >
-          <span>3</span>/10
-        </p>
-        <p>
-          昨日有消耗账户 >
-          <span>3</span>/10
-        </p>
-        <p>
-          当前无余额账户 >
-          <span>3</span>/10
-        </p>
-        <p>
-          昨日波动账户 >
-          <span>0</span>/10
-        </p>
-        <p>
-          待解封账户 >
-          <span>1</span>/10
-        </p>
-      </div>
+      <p class="client-account-detail-title">账户</p>
+      <!--<div class="client-account-detail-promote">-->
+        <!--<p>-->
+          <!--昨日撞线账户 >-->
+          <!--<span>3</span>/10-->
+        <!--</p>-->
+        <!--<p>-->
+          <!--昨日有消耗账户 >-->
+          <!--<span>3</span>/10-->
+        <!--</p>-->
+        <!--<p>-->
+          <!--当前无余额账户 >-->
+          <!--<span>3</span>/10-->
+        <!--</p>-->
+        <!--<p>-->
+          <!--昨日波动账户 >-->
+          <!--<span>0</span>/10-->
+        <!--</p>-->
+        <!--<p>-->
+          <!--待解封账户 >-->
+          <!--<span>1</span>/10-->
+        <!--</p>-->
+      <!--</div>-->
     </div>
     <div class="client-account-content">
       <div class="client-account-content-table">
@@ -119,7 +119,7 @@ export default {
   },
   data () {
     return {
-      status: '',
+      status: null,
       accountOptions: [],
       accountData: [],
       curPage: 1,

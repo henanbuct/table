@@ -138,7 +138,7 @@
           </div>
           <p
             class="diagnosis-account-data-result-tip"
-          >您的账户在{{opDate}}，由于您的账户在{{description}}原因，已违规，请及时处理</p>
+          >{{description}}</p>
           <div class="diagnosis-account-data-result-promote">
             <div>
               <i class="el-icon-warning"></i>

@@ -111,7 +111,7 @@ export default {
   },
   data () {
     return {
-      status: '',
+      status: null,
       searchOptions: [],
       searchData: [],
       curPage: 1,

@@ -129,7 +129,7 @@ export default {
   },
   data () {
     return {
-      status: '',
+      status: null,
       ideaOptions: [],
       ideaData: [],
       curPage: 1,

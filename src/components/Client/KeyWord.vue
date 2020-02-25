@@ -1,42 +1,42 @@
 <template>
   <div class="client-keyWord">
     <div class="client-keyWord-detail">
-      <p class="client-keyWord-detail-title">关键词：</p>
-      <div class="client-keyWord-detail-promote">
-        <p>
-          消费中关键词>
-          <span>3</span>/10
-        </p>
-        <p>
-          消耗下降关键词 >
-          <span>3</span>/10
-        </p>
-        <p>
-          有展现无点击关键词 >
-          <span>3</span>/10
-        </p>
+      <p class="client-keyWord-detail-title">关键词</p>
+      <!--<div class="client-keyWord-detail-promote">-->
+        <!--<p>-->
+          <!--消费中关键词>-->
+          <!--<span>3</span>/10-->
+        <!--</p>-->
+        <!--<p>-->
+          <!--消耗下降关键词 >-->
+          <!--<span>3</span>/10-->
+        <!--</p>-->
+        <!--<p>-->
+          <!--有展现无点击关键词 >-->
+          <!--<span>3</span>/10-->
+        <!--</p>-->
 
-        <p>
-          无展现关键词 >
-          <span>1</span>/10
-        </p>
-        <p>
-          审核中关键词 >
-          <span>1</span>/10
-        </p>
-        <p>
-          审核未通过关键词 >
-          <span>1</span>/10
-        </p>
-        <p>
-          无效关键词 >
-          <span>1</span>/10
-        </p>
-        <p>
-          暂停关键词 >
-          <span>1</span>/10
-        </p>
-      </div>
+        <!--<p>-->
+          <!--无展现关键词 >-->
+          <!--<span>1</span>/10-->
+        <!--</p>-->
+        <!--<p>-->
+          <!--审核中关键词 >-->
+          <!--<span>1</span>/10-->
+        <!--</p>-->
+        <!--<p>-->
+          <!--审核未通过关键词 >-->
+          <!--<span>1</span>/10-->
+        <!--</p>-->
+        <!--<p>-->
+          <!--无效关键词 >-->
+          <!--<span>1</span>/10-->
+        <!--</p>-->
+        <!--<p>-->
+          <!--暂停关键词 >-->
+          <!--<span>1</span>/10-->
+        <!--</p>-->
+      <!--</div>-->
     </div>
     <div class="client-keyWord-content">
       <div class="client-keyWord-content-table">
@@ -135,7 +135,7 @@ export default {
   },
   data () {
     return {
-      status: '',
+      status: null,
       keyWordOptions: [],
       keyWordData: [],
       curPage: 1,

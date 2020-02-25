@@ -78,95 +78,107 @@
               label="状态"
             ></el-table-column>
             <el-table-column
-              prop="channelsManager"
+              v-if="status==='消耗下降'"
+              prop="isnegative"
               label="昨日是否有负向操作"
             ></el-table-column>
             <el-table-column
-              prop="channelsManager"
+              v-if="status==='消耗下降'"
+              prop="isdecrease"
               label="昨日流量是否下降"
             ></el-table-column>
             <el-table-column
-              prop="businessManager"
+              v-if="status==='审核未通过' || status==='无效' || status==='暂停'"
+              prop="reason"
               label="原因"
             ></el-table-column>
             <el-table-column
-              prop="businessManager"
+              prop="match"
               label="匹配"
             ></el-table-column>
             <el-table-column
-              prop="state"
+              prop="price"
               label="出价"
             ></el-table-column>
             <el-table-column
-              prop="state"
+              v-if="status==='无效'"
+              prop="pc_base_price"
               label="计算机起价"
             ></el-table-column>
             <el-table-column
-              prop="state"
+              v-if="status==='无效'"
+              prop="wx_base_price"
               label="移动起价"
             ></el-table-column>
             <el-table-column
-              prop="state"
+              v-if="status==='暂停'"
+              prop="pause_time"
               label="暂停时间"
             ></el-table-column>
             <el-table-column
-              prop="state"
+              prop="query_pv"
               label="展现量"
             ></el-table-column>
             <el-table-column
-              prop="state"
+              prop="pc_quality"
               label="计算机质量度"
             ></el-table-column>
             <el-table-column
-              prop="state"
+              prop="wx_quality"
               label="移动质量度"
             ></el-table-column>
             <el-table-column
-              prop="budget"
+              prop="query_pv"
               label="展现量"
               min-width="80"
             ></el-table-column>
             <el-table-column
-              prop="budget"
+              v-if="status==='有展现无点击'"
+              prop="cpcrank"
               label="平均排名"
               min-width="80"
             ></el-table-column>
             <el-table-column
-              prop="budget"
+              prop="query_pv"
               label="搜索总量"
               min-width="80"
             ></el-table-column>
             <el-table-column
-              prop="budget"
+              prop="yesterday_cost"
               label="本期消耗/元"
               min-width="80"
             ></el-table-column>
             <el-table-column
-              prop="budget"
+              prop="beforeyesterday_cost"
               label="上期消耗/元"
               min-width="80"
             ></el-table-column>
             <el-table-column
-              prop="budget"
+              v-if="status==='消耗下降'"
+              prop="decrease_cost"
               label="下降金额/元"
               min-width="80"
             ></el-table-column>
             <el-table-column
-              prop="budget"
+              v-if="status==='消耗下降'"
+              prop="growth_rate"
               label="增长率"
               min-width="80"
             ></el-table-column>
             <el-table-column
-              prop="budget"
+              v-if="status==='暂停'"
+              prop="competition"
               label="竞品是否投放"
               min-width="80"
             ></el-table-column>
             <el-table-column
+              v-if="status==='暂停'"
               prop="default_url"
               label="默认访问url"
               min-width="80"
             ></el-table-column>
             <el-table-column
+              v-if="status==='暂停'"
               prop="wx_url"
               label="移动访问url"
               min-width="80"
@@ -193,7 +205,7 @@ export default {
   },
   data () {
     return {
-      status: '',
+      status: null,
       keyWordOptions: [],
       keyWordData: [],
       curPage: 1,
