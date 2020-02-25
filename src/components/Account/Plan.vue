@@ -6,11 +6,11 @@
       <div class="account-plan-detail-promote">
         <p>
           计划预算不足 >
-          <span>3</span>/10
+          <span>{{otherInfo.budget_num}}</span>/{{otherInfo.total_num}}
         </p>
         <p>
           暂停 >
-          <span>1</span>/10
+          <span>{{otherInfo.pause_num}}</span>/{{otherInfo.total_num}}
         </p>
       </div>
     </div>
@@ -117,6 +117,7 @@ export default {
       curPage: 1,
       pageSize: 10,
       total: 0,
+      otherInfo: null
     }
   },
   watch: {
@@ -157,11 +158,16 @@ export default {
         params.accountId = this.account.accountId
       }
 
+      if(this.dateString){
+        params.dateString = this.dateString
+      }
+
       this.$axios.post('/account/analysis/account/selectPlan', params).then(res => {
         if (res.status === 200) {
           if (res.data.code === 0) {
             this.total = res.data.total
             this.planData = res.data.data && res.data.data.length > 0 ? res.data.data : []
+            this.otherInfo = res.data.otherInfo
           }
         } else {
           console.log("获取接口失败")

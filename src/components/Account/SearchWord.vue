@@ -158,6 +158,10 @@ export default {
         params.accountId = this.account.accountId
       }
 
+      if(this.account.dateString){
+        params.dateString = this.account.dateString
+      }
+
       this.$axios.post('/account/analysis/account/selectSearchWord', params).then(res => {
         if (res.status === 200) {
           if (res.data.code === 0) {

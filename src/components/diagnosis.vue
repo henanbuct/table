@@ -258,19 +258,19 @@ export default {
     },
     linkAccountName () {
       this.$emit('activeNameDiagnosis', 'account');
-      this.$router.push({ name: 'account', params: { accountInfo: this.accountInfo, accountName: this.accountInfo.accountName } })
+      this.$router.push({ name: 'account', params: { accountInfo: this.accountInfo, accountName: this.accountInfo.accountName, dateString: this.dateString } })
     },
     linkAccountId () {
       this.$emit('activeNameDiagnosis', 'account');
-      this.$router.push({ name: 'account', params: { accountInfo: this.accountInfo, accountId: this.accountInfo.accountId } })
+      this.$router.push({ name: 'account', params: { accountInfo: this.accountInfo, accountId: this.accountInfo.accountId, dateString: this.dateString } })
     },
     linkClientName () {
       this.$emit('activeNameDiagnosis', 'client');
-      this.$router.push({ name: 'client', params: { accountInfo: this.accountInfo, customName: this.accountInfo.customName } })
+      this.$router.push({ name: 'client', params: { accountInfo: this.accountInfo, customName: this.accountInfo.customName, dateString: this.dateString } })
     },
     linkClientId () {
       this.$emit('activeNameDiagnosis', 'client');
-      this.$router.push({ name: 'client', params: { accountInfo: this.accountInfo, customId: this.accountInfo.customId } })
+      this.$router.push({ name: 'client', params: { accountInfo: this.accountInfo, customId: this.accountInfo.customId, dateString: this.dateString } })
     },
   }
 };

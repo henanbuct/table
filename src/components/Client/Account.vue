@@ -75,9 +75,9 @@
               min-width="100"
             ></el-table-column>
             <el-table-column
-              prop="state"
+              prop='status'
               label="状态"
-            ></el-table-column>
+            ></el-table-column> //这个值赋值成status
             <el-table-column
               prop="reason"
               label="原因"
