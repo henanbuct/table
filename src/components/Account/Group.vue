@@ -77,6 +77,7 @@
               label="当前消耗/元"
             ></el-table-column>
             <el-table-column
+              v-if="status==='无有效关键词' || status==='无有效创意'"
               prop="beforeYesterdayCost"
               label="前一天消耗/元"
               min-width="80"
@@ -120,18 +121,19 @@ export default {
   mounted () {
     this.groupOptions = [
       {
+        label: '暂停',
+        value: '暂停'
+      },
+      {
         label: '无有效关键词',
         value: '无有效关键词'
       },
       {
         label: '无有效创意',
         value: '无有效创意'
-      },
-      {
-        label: '暂停',
-        value: '暂停'
       }
     ];
+    this.status = '暂停';
     this.getAccountGroup();
   },
   methods: {

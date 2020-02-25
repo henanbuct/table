@@ -132,6 +132,7 @@ export default {
         value: '暂停'
       }
     ];
+    this.status = '无有效关键词';
     this.getAccountGroup();
   },
   methods: {

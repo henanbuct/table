@@ -59,7 +59,7 @@
               label="关键词"
             ></el-table-column>
             <el-table-column
-              prop="isPurse"
+              prop="match"
               label="匹配"
               min-width="80"
             ></el-table-column>
@@ -68,7 +68,7 @@
               label="出价"
             ></el-table-column>
             <el-table-column
-              prop="cost"
+              prop="pv"
               label="搜索总量"
             ></el-table-column>
             <el-table-column
@@ -135,6 +135,7 @@ export default {
         value: '未购'
       }
     ];
+    this.status = '已购';
     this.getAccountPlan();
   },
   methods: {

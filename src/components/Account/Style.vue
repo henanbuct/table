@@ -155,6 +155,7 @@ export default {
         value: '移动超级皇冠样式'
       }
     ];
+    this.status = '计算机皇冠列表';
     this.getAccountStyle();
   },
   methods: {

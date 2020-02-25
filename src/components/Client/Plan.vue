@@ -127,6 +127,7 @@ export default {
         value: '暂停'
       }
     ];
+    this.status = '计划预算不足';
     this.getAccountPlan();
   },
   methods: {

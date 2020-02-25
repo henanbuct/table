@@ -125,6 +125,21 @@ export default {
     }
   },
   mounted () {
+    this.ideaOptions = [
+      {
+        label: '无展现',
+        value: '无展现'
+      },
+      {
+        label: '审核未通过',
+        value: '审核未通过'
+      },
+      {
+        label: '暂停',
+        value: '暂停'
+      }
+    ];
+    this.status = '无展现';
     this.getAccountIdea();
   },
   methods: {

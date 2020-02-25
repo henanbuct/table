@@ -66,12 +66,13 @@
               min-width="40"
             ></el-table-column>
             <el-table-column
+              v-if="status==='审核未通过' || status==='暂停'"
               prop="reason"
               min-width="70"
               label="原因"
             ></el-table-column>
-
             <el-table-column
+              v-if="status==='暂停'"
               prop="pause_time"
               label="暂停时间"
               min-width="80"
@@ -157,6 +158,7 @@ export default {
         value: '暂停'
       }
     ];
+    this.status = '无展现';
     this.getAccountIdea();
   },
   methods: {

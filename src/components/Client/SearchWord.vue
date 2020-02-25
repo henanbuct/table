@@ -53,7 +53,6 @@
               prop="total_num"
               label="搜索词总量"
             ></el-table-column>
-
             <el-table-column
               prop="purchase_num"
               label="购买总量"
@@ -109,6 +108,7 @@ export default {
         value: '未购'
       }
     ];
+    this.status = '已购';
     this.getAccountPlan();
   },
   methods: {
@@ -131,7 +131,7 @@ export default {
         params.customId = this.client.customId
       }
 
-      this.$axios.post('/account/analysis/custom/selectKeyword', params).then(res => {
+      this.$axios.post('/account/analysis/custom/selectSearchWord', params).then(res => {
         if (res.status === 200) {
           if (res.data.code === 0) {
             this.total = res.data.total

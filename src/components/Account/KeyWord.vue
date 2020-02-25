@@ -249,6 +249,7 @@ export default {
         value: '暂停'
       }
     ];
+    this.status = '有消耗';
     this.getAccountPlan();
   },
   methods: {

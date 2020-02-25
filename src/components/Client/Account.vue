@@ -62,15 +62,15 @@
               min-width="100"
             ></el-table-column>
             <el-table-column
-              prop="businessScope"
+              prop="bizcode"
               label="业务范围"
             ></el-table-column>
             <el-table-column
-              prop="channelsManager"
+              prop="channelrealname"
               label="渠道经理"
             ></el-table-column>
             <el-table-column
-              prop="businessManager"
+              prop="supportrealname"
               label="业务经理"
               min-width="100"
             ></el-table-column>
@@ -147,6 +147,7 @@ export default {
         value: '异常'
       }
     ];
+    this.status = '暂停';
     this.getClientAccount();
   },
   methods: {
