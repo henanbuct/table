@@ -6,11 +6,13 @@
       <div class="account-plan-detail-promote">
         <p>
           计划预算不足 >
-          <span>{{otherInfo.budget_num}}</span>/{{otherInfo.total_num}}
+          <span>{{otherInfo.budget_num}}</span>
+          /{{otherInfo.total_num}}
         </p>
         <p>
           暂停 >
-          <span>{{otherInfo.pause_num}}</span>/{{otherInfo.total_num}}
+          <span>{{otherInfo.pause_num}}</span>
+          /{{otherInfo.total_num}}
         </p>
       </div>
     </div>
@@ -157,9 +159,10 @@ export default {
       } else {
         params.accountId = this.account.accountId
       }
+      console.log(">>>>>>account>>", this.account)
 
-      if(this.dateString){
-        params.dateString = this.dateString
+      if (this.account.dateString) {
+        params.dateString = this.account.dateString
       }
 
       this.$axios.post('/account/analysis/account/selectPlan', params).then(res => {

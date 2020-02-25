@@ -74,6 +74,7 @@ export default {
   },
 
   created () {
+
     this.accountData = this.$route.params.accountInfo
     this.account = this.$route.params
     this.accountName = this.$route.params.accountInfo.accountName || ''
@@ -85,6 +86,7 @@ export default {
     this.consumeDays = this.$route.params.accountInfo.consumeDays || 0
     this.todayConsume = this.$route.params.accountInfo.todayConsume || 0
     this.accountDailyBudget = this.$route.params.accountInfo.accountDailyBudget || 0
+    console.log(">>>>>>>>", this.account)
   },
 };
 </script>
