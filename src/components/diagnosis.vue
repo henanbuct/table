@@ -148,7 +148,7 @@
           </div>
           <p
             class="diagnosis-account-data-result-tip"
-          >系统检测到您目前有{{groupPauseNumber}}个({{groupInvalidRate}}%)无效推广组，其中{{groupInvalidKeywordNumber}}个未添加物料，{{groupInvalidIdeaNumber}}个物料审核未通过，一个物料暂停，建议您及时修改</p>
+          >系统检测到您目前有{{groupPauseNumber}}个({{groupInvalidRate}}%)无效推广组，其中{{groupInvalidIdeaNumber}}个无有效创意，{{groupInvalidKeywordNumber}}个无有效关键词，建议您及时修改！</p>
           <div class="diagnosis-account-data-result-word">
             <div>
               <i class="el-icon-warning"></i>
@@ -158,7 +158,10 @@
           </div>
           <p
             class="diagnosis-account-data-result-tip"
-          >2，系统检测到您目前有{{keywordShowUnClickNumber}}个({{keywordShowUnClickRate}}%)有展现无点击的关键词平均展现量为{{keywordAvgPv}}，其中{{keywordIdeaNumber}}个由于创意相关性较差，{{keywordRankNumber}}个由于关键性排名较低没有形成点击，建议您及时修改</p>
+          >1，系统检测到您目前有{{totalPauseNumber}}个({{keywordPauseRate}}%)关键词暂停，其中有{{activeNumber}}个为行业活跃词，建议您重新开启关键词！</p>
+          <p
+            class="diagnosis-account-data-result-tip"
+          >2，系统检测到您目前有{{keywordShowUnClickNumber}}个({{keywordShowUnClickRate}}%)有展现无点击的关键词，平均展现量为{{keywordAvgPv}}，其中{{keywordIdeaNumber}}个由于创意相关性较差，{{keywordRankNumber}}个由于关键性排名较低没有形成点击，建议您及时修改！</p>
         </div>
       </div>
     </div>
@@ -187,6 +190,7 @@ export default {
       diagramType: '',
       accountInfo: {},
       totalPauseNumber: '',
+      keywordPauseRate: '',
       activeNumber: '',
       keywordShowUnClickNumber: '',
       keywordShowUnClickRate: '',
@@ -198,7 +202,8 @@ export default {
       groupInvalidKeywordNumber: '',
       groupInvalidIdeaNumber: '',
       description: '',
-      opDate: ''
+      opDate: '',
+      dateStringTmp: null
     };
   },
 
@@ -219,7 +224,9 @@ export default {
           params.customId = this.clientInput
         }
       }
-      params.dateString = this.dateString ? moment(this.dateString).format('YYYY-MM-DD') : ''
+      params.dateString = this.dateString ? moment(this.dateString).format('YYYY-MM-DD') : null;
+
+      this.dateStringTmp = params.dateString;
 
       this.$axios.post('/account/analysis/diagnosis/select', params).then(res => {
         console.log("3434434", res)
@@ -239,14 +246,17 @@ export default {
             this.opDate = res.data.data.accountResult.opDate || ''
             this.description = res.data.data.accountResult.description || ''
 
+
             this.totalPauseNumber = res.data.data.diagnosisKeyword.totalPauseNumber
+            this.keywordPauseRate = res.data.data.diagnosisKeyword.keywordPauseRate
             this.activeNumber = res.data.data.diagnosisKeyword.activeNumber
             this.keywordShowUnClickNumber = res.data.data.diagnosisKeyword.keywordShowUnClickNumber
             this.keywordShowUnClickRate = res.data.data.diagnosisKeyword.keywordShowUnClickRate
-            this.keywordAvgPv = res.data.data.diagnosisKeyword.accountDailkeywordAvgPvyBudget
+            this.keywordAvgPv = res.data.data.diagnosisKeyword.keywordAvgPv
             this.keywordIdeaNumber = res.data.data.diagnosisKeyword.keywordIdeaNumber
             this.keywordRankNumber = res.data.data.diagnosisKeyword.keywordRankNumber
 
+            this.groupPauseNumber = res.data.data.diagnosisGroup.groupPauseNumber
             this.groupInvalidRate = res.data.data.diagnosisGroup.groupInvalidRate
             this.groupInvalidKeywordNumber = res.data.data.diagnosisGroup.groupInvalidKeywordNumber
             this.groupInvalidIdeaNumber = res.data.data.diagnosisGroup.groupInvalidIdeaNumber
@@ -258,19 +268,19 @@ export default {
     },
     linkAccountName () {
       this.$emit('activeNameDiagnosis', 'account');
-      this.$router.push({ name: 'account', params: { accountInfo: this.accountInfo, accountName: this.accountInfo.accountName, dateString: this.dateString } })
+      this.$router.push({ name: 'account', params: { accountInfo: this.accountInfo, accountName: this.accountInfo.accountName, dateString: this.dateStringTmp  } })
     },
     linkAccountId () {
       this.$emit('activeNameDiagnosis', 'account');
-      this.$router.push({ name: 'account', params: { accountInfo: this.accountInfo, accountId: this.accountInfo.accountId, dateString: this.dateString } })
+      this.$router.push({ name: 'account', params: { accountInfo: this.accountInfo, accountId: this.accountInfo.accountId, dateString: this.dateStringTmp  } })
     },
     linkClientName () {
       this.$emit('activeNameDiagnosis', 'client');
-      this.$router.push({ name: 'client', params: { accountInfo: this.accountInfo, customName: this.accountInfo.customName, dateString: this.dateString } })
+      this.$router.push({ name: 'client', params: { accountInfo: this.accountInfo, customName: this.accountInfo.customName, dateString: this.dateStringTmp  } })
     },
     linkClientId () {
       this.$emit('activeNameDiagnosis', 'client');
-      this.$router.push({ name: 'client', params: { accountInfo: this.accountInfo, customId: this.accountInfo.customId, dateString: this.dateString } })
+      this.$router.push({ name: 'client', params: { accountInfo: this.accountInfo, customId: this.accountInfo.customId, dateString: this.dateStringTmp  } })
     },
   }
 };

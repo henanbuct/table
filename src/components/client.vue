@@ -10,7 +10,7 @@
           <span>客户ID：{{customId}}</span>
         </div>
         <div class="client-detail-message">
-          <span>账户总数：{{accountAmount}}元</span>
+          <span>账户总数：{{accountAmount}}</span>
         </div>
       </div>
     </div>

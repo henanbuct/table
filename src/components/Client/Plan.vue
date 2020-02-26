@@ -149,6 +149,9 @@ export default {
       } else {
         params.customId = this.client.customId
       }
+      if(this.client.dateString){
+        params.dateString = this.client.dateString
+      }
 
       this.$axios.post('account/analysis/custom/selectPlan', params).then(res => {
         if (res.status === 200) {

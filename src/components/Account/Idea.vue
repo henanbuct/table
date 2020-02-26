@@ -140,7 +140,7 @@ export default {
   },
   watch: {
     status (val) {
-      this.getAccountGroup()
+      this.getAccountIdea()
     }
   },
   mounted () {

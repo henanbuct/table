@@ -131,6 +131,10 @@ export default {
         params.customId = this.client.customId
       }
 
+      if(this.client.dateString){
+        params.dateString = this.client.dateString
+      }
+
       this.$axios.post('/account/analysis/custom/selectSearchWord', params).then(res => {
         if (res.status === 200) {
           if (res.data.code === 0) {
