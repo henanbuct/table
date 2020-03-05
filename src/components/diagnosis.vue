@@ -110,19 +110,28 @@
             </p>
           </div>
           <br />
-          <div class="diagnosis-account-detail-table-message">
+          <div class="diagnosis-account-detail-table-message"
+               v-if="radio==='client'">
+            <span>账户状态：{{accountCount}}</span>
+          </div>
+          <div class="diagnosis-account-detail-table-message"
+               v-if="radio==='account'">
             <span>账户状态：{{accountStatus}}</span>
           </div>
-          <div class="diagnosis-account-detail-table-message">
+          <div class="diagnosis-account-detail-table-message"
+               v-if="radio==='account'">
             <span>账户余额：{{accountAmount}}元</span>
           </div>
-          <div class="diagnosis-account-detail-table-message">
+          <div class="diagnosis-account-detail-table-message"
+               v-if="radio==='account'">
             <span>余额可消耗天数：{{consumeDays}}天</span>
           </div>
-          <div class="diagnosis-account-detail-table-message">
+          <div class="diagnosis-account-detail-table-message"
+               v-if="radio==='account'">
             <span>今日消耗：{{todayConsume}}元</span>
           </div>
-          <div class="diagnosis-account-detail-table-message">
+          <div class="diagnosis-account-detail-table-message"
+               v-if="radio==='account'">
             <span>账户日预算：{{accountDailyBudget}}</span>
           </div>
         </div>
@@ -183,6 +192,7 @@ export default {
       customId: '',
       accountStatus: '',
       accountAmount: '',
+      accountCount: 0,
       consumeDays: 0,
       todayConsume: '',
       accountDailyBudget: '',
@@ -238,6 +248,7 @@ export default {
             this.customId = res.data.data.accountInfo.customId
             this.accountStatus = res.data.data.accountInfo.accountStatus ? '正常' : '非正常'
             this.accountAmount = res.data.data.accountInfo.accountAmount || 0
+            this.accountCount = res.data.data.accountInfo.accountCount || 0
             this.consumeDays = res.data.data.accountInfo.consumeDays || 0
             this.todayConsume = res.data.data.accountInfo.todayConsume || 0
             this.accountDailyBudget = res.data.data.accountInfo.accountDailyBudget || 0

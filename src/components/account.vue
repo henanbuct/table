@@ -79,8 +79,8 @@ export default {
     this.account = this.$route.params
     this.accountName = this.$route.params.accountInfo.accountName || ''
     this.accountId = this.$route.params.accountInfo.accountId || ''
-    this.clientName = this.$route.params.accountInfo.clientName || ''
-    this.clientId = this.$route.params.accountInfo.clientId || ''
+    this.clientName = this.$route.params.accountInfo.customName || ''
+    this.clientId = this.$route.params.accountInfo.customId || ''
     this.accountStatus = this.$route.params.accountInfo.accountStatus ? '正常' : '非正常'
     this.accountAmount = this.$route.params.accountInfo.accountAmount || 0
     this.consumeDays = this.$route.params.accountInfo.consumeDays || 0

@@ -77,23 +77,23 @@
             <el-table-column
               prop='status'
               label="状态"
-            ></el-table-column> //这个值赋值成status
+            ></el-table-column>
             <el-table-column
               prop="reason"
               label="原因"
               min-width="120"
             ></el-table-column>
             <el-table-column
-              prop="budget"
+              prop="accountBudget"
               label="账户预算"
               min-width="80"
             ></el-table-column>
             <el-table-column
-              prop="balance"
+              prop="accountAmount"
               label="余额"
             ></el-table-column>
             <el-table-column
-              prop="total"
+              prop="totalConsume"
               label="总消耗"
             ></el-table-column>
           </el-table>

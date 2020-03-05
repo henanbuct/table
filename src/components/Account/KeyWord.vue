@@ -5,31 +5,31 @@
       <div class="account-keyWord-detail-promote">
         <p>
           有消耗>
-          <span>3</span>/10
+          <span>{{otherInfo.cost_num}}</span>/{{otherInfo.total_num}}
         </p>
         <p>
           消耗下降 >
-          <span>3</span>/10
+          <span>{{otherInfo.cost_decrease_num}}</span>/{{otherInfo.total_num}}
         </p>
         <p>
           有展现无点击 >
-          <span>3</span>/10
+          <span>{{otherInfo.show_unclick_num}}</span>/{{otherInfo.total_num}}
         </p>
         <p>
           无展现 >
-          <span>1</span>/10
+          <span>{{otherInfo.unshow_num}}</span>/{{otherInfo.total_num}}
         </p>
         <p>
           审核未通过 >
-          <span>1</span>/10
+          <span>{{otherInfo.check_fail_num}}</span>/{{otherInfo.total_num}}
         </p>
         <p>
           无效 >
-          <span>1</span>/10
+          <span>{{otherInfo.invalid_num}}</span>/{{otherInfo.total_num}}
         </p>
         <p>
           暂停 >
-          <span>1</span>/10
+          <span>{{otherInfo.pause_num}}</span>/{{otherInfo.total_num}}
         </p>
       </div>
     </div>
@@ -116,10 +116,6 @@
               label="暂停时间"
             ></el-table-column>
             <el-table-column
-              prop="query_pv"
-              label="展现量"
-            ></el-table-column>
-            <el-table-column
               prop="pc_quality"
               label="计算机质量度"
             ></el-table-column>
@@ -128,6 +124,7 @@
               label="移动质量度"
             ></el-table-column>
             <el-table-column
+              v-if="status==='有展现无点击'"
               prop="query_pv"
               label="展现量"
               min-width="80"
@@ -211,6 +208,7 @@ export default {
       curPage: 1,
       pageSize: 10,
       total: 0,
+      otherInfo: '',
     }
   },
   watch: {
@@ -282,6 +280,7 @@ export default {
           if (res.data.code === 0) {
             this.total = res.data.total
             this.keyWordData = res.data.data && res.data.data.length > 0 ? res.data.data : []
+            this.otherInfo = res.data.otherInfo ? res.data.otherInfo : ''
           }
         } else {
           console.log("获取接口失败")

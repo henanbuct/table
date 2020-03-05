@@ -5,28 +5,29 @@
       <div class="account-style-detail-promote">
         <p>
           计算机皇冠列表 >
-          <span>3</span>/10
+          <span>{{otherInfo.pcCrownListNum}}</span>
+          /{{otherInfo.total_num}}
         </p>
         <p>
           移动皇冠列表 >
-          <span>3</span>/10
+          <span>{{otherInfo.wxCrownListNum}}</span>/{{otherInfo.total_num}}
         </p>
         <p>
           计算机皇冠通用词 >
-          <span>3</span>/10
+          <span>{{otherInfo.pcCrownGeneralWordNum}}</span>/{{otherInfo.total_num}}
         </p>
 
         <p>
           移动皇冠通用词 >
-          <span>1</span>/10
+          <span>{{otherInfo.wxCrownGeneralWordNum}}</span>/{{otherInfo.total_num}}
         </p>
         <p>
           计算机超级皇冠样式 >
-          <span>1</span>/10
+          <span>{{otherInfo.pcSuperCrownStyleNum}}</span>/{{otherInfo.total_num}}
         </p>
         <p>
           移动超级皇冠样式 >
-          <span>1</span>/10
+          <span>{{otherInfo.wxSuperCrownStyleNum}}</span>/{{otherInfo.total_num}}
         </p>
       </div>
     </div>
@@ -121,6 +122,7 @@ export default {
       curPage: 1,
       pageSize: 10,
       total: 0,
+      otherInfo: '',
     }
   },
   watch: {
@@ -187,6 +189,7 @@ export default {
           if (res.data.code === 0) {
             this.total = res.data.total
             this.styleData = res.data.data && res.data.data.length > 0 ? res.data.data : []
+            this.otherInfo = res.data.otherInfo ? res.data.otherInfo : ''
           }
         } else {
           console.log("获取接口失败")

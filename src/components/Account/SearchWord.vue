@@ -5,11 +5,11 @@
       <div class="account-search-detail-promote">
         <p>
           已购 >
-          <span>30</span>/340
+          <span>{{otherInfo.purchase_num}}</span>/{{otherInfo.total_num}}
         </p>
         <p>
           未购 >
-          <span>320</span>/340
+          <span>{{otherInfo.total_num-otherInfo.purchase_num}}</span>/{{otherInfo.total_num}}
         </p>
       </div>
     </div>
@@ -117,6 +117,7 @@ export default {
       curPage: 1,
       pageSize: 10,
       total: 0,
+      otherInfo: '',
     }
   },
   watch: {
@@ -167,6 +168,7 @@ export default {
           if (res.data.code === 0) {
             this.total = res.data.total
             this.searchData = res.data.data && res.data.data.length > 0 ? res.data.data : []
+            this.otherInfo = res.data.otherInfo ? res.data.otherInfo : ''
           }
         } else {
           console.log("获取接口失败")

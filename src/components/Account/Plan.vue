@@ -119,7 +119,7 @@ export default {
       curPage: 1,
       pageSize: 10,
       total: 0,
-      otherInfo: null
+      otherInfo: ''
     }
   },
   watch: {
@@ -170,7 +170,7 @@ export default {
           if (res.data.code === 0) {
             this.total = res.data.total
             this.planData = res.data.data && res.data.data.length > 0 ? res.data.data : []
-            this.otherInfo = res.data.otherInfo
+            this.otherInfo = res.data.otherInfo ? res.data.otherInfo : ''
           }
         } else {
           console.log("获取接口失败")
