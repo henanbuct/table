@@ -2,28 +2,29 @@
   <div class="client-account">
     <div class="client-account-detail">
       <p class="client-account-detail-title">账户</p>
-      <!--<div class="client-account-detail-promote">-->
-        <!--<p>-->
-          <!--昨日撞线账户 >-->
-          <!--<span>3</span>/10-->
-        <!--</p>-->
-        <!--<p>-->
-          <!--昨日有消耗账户 >-->
-          <!--<span>3</span>/10-->
-        <!--</p>-->
-        <!--<p>-->
-          <!--当前无余额账户 >-->
-          <!--<span>3</span>/10-->
-        <!--</p>-->
-        <!--<p>-->
-          <!--昨日波动账户 >-->
-          <!--<span>0</span>/10-->
-        <!--</p>-->
-        <!--<p>-->
-          <!--待解封账户 >-->
-          <!--<span>1</span>/10-->
-        <!--</p>-->
-      <!--</div>-->
+      <div class="client-account-detail-promote">
+        <p>
+          昨日撞线账户 >
+          <span>{{otherInfo.zxNumber?otherInfo.zxNumber:0}}</span>/{{otherInfo.totalNumber?otherInfo.totalNumber:0}}
+        </p>
+        <p>
+          昨日有消耗账户 >
+          <span>{{otherInfo.costNumber?otherInfo.costNumber:0}}</span>/{{otherInfo.totalNumber?otherInfo.totalNumber:0}}
+        </p>
+        <p>
+          当前无余额账户 >
+          <span>{{otherInfo.noAccountAmount?otherInfo.noAccountAmount:'-'}}</span>/{{otherInfo.totalNumber?otherInfo.totalNumber:0}}
+        </p>
+        <br>
+        <p>
+          昨日波动账户 >
+          <span>{{otherInfo.flucNumber?otherInfo.flucNumber:0}}</span>/{{otherInfo.totalNumber?otherInfo.totalNumber:0}}
+        </p>
+        <p>
+          待解封账户 >
+          <span>{{otherInfo.closureNumber?otherInfo.closureNumber:0}}</span>/{{otherInfo.totalNumber?otherInfo.totalNumber:0}}
+        </p>
+      </div>
     </div>
     <div class="client-account-content">
       <div class="client-account-content-table">
@@ -125,6 +126,7 @@ export default {
       curPage: 1,
       pageSize: 10,
       total: 0,
+      otherInfo: '',
     }
   },
   watch: {
@@ -179,6 +181,7 @@ export default {
           if (res.data.code === 0) {
             this.total = res.data.total
             this.accountData = res.data.data && res.data.data.length > 0 ? res.data.data : []
+            this.otherInfo = res.data.otherInfo ? res.data.otherInfo : ''
           }
         } else {
           console.log("获取接口失败")

@@ -112,7 +112,7 @@
           <br />
           <div class="diagnosis-account-detail-table-message"
                v-if="radio==='client'">
-            <span>账户状态：{{accountCount}}</span>
+            <span>账户总数：{{accountCount}}</span>
           </div>
           <div class="diagnosis-account-detail-table-message"
                v-if="radio==='account'">

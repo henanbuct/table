@@ -10,7 +10,7 @@
           <span>客户ID：{{customId}}</span>
         </div>
         <div class="client-detail-message">
-          <span>账户总数：{{accountAmount}}</span>
+          <span>账户总数：{{accountCount}}</span>
         </div>
       </div>
     </div>
@@ -45,7 +45,7 @@ export default {
     return {
       customName: '',
       customId: '',
-      accountAmount: '',
+      accountCount: '',
       client: {}
     };
   },
@@ -54,7 +54,7 @@ export default {
   created () {
     this.customName = this.$route.params.accountInfo.customName || ''
     this.customId = this.$route.params.accountInfo.customId || ''
-    this.accountAmount = this.$route.params.accountInfo.accountAmount || 0
+    this.accountCount = this.$route.params.accountInfo.accountCount || 0
     this.client = this.$route.params
   },
 
