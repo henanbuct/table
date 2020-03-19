@@ -79,7 +79,7 @@
           >
             <p>
               账户名称：
-              <span @click="linkAccountName">{{accountName}}</span>
+              <span @click="linkAccountId">{{accountName}}</span>
             </p>
           </div>
           <div
@@ -97,7 +97,7 @@
           >
             <p>
               客户名称：
-              <span @click="linkClientName">{{customName}}</span>
+              <span @click="linkClientId">{{customName}}</span>
             </p>
           </div>
           <div
@@ -157,7 +157,7 @@
           </div>
           <p
             class="diagnosis-account-data-result-tip"
-          >系统检测到您目前有{{groupPauseNumber}}个({{groupInvalidRate}}%)无效推广组，其中{{groupInvalidIdeaNumber}}个无有效创意，{{groupInvalidKeywordNumber}}个无有效关键词，建议您及时修改！</p>
+          >系统检测到您目前有{{groupTotalInvalidNumber}}个({{groupInvalidRate}}%)无效推广组，其中{{groupInvalidIdeaNumber}}个无有效创意，{{groupInvalidKeywordNumber}}个无有效关键词，建议您及时修改！</p>
           <div class="diagnosis-account-data-result-word">
             <div>
               <i class="el-icon-warning"></i>
@@ -207,7 +207,7 @@ export default {
       keywordAvgPv: '',
       keywordIdeaNumber: '',
       keywordRankNumber: '',
-      groupPauseNumber: '',
+      groupTotalInvalidNumber: '',
       groupInvalidRate: '',
       groupInvalidKeywordNumber: '',
       groupInvalidIdeaNumber: '',
@@ -247,7 +247,7 @@ export default {
             this.customName = res.data.data.accountInfo.customName
             this.customId = res.data.data.accountInfo.customId
             this.accountStatus = res.data.data.accountInfo.accountStatus ? '正常' : '非正常'
-            this.accountAmount = res.data.data.accountInfo.accountAmount || 0
+            this.accountAmount = res.data.data.accountInfo.accountAmount ? (res.data.data.accountInfo.accountAmount/100).toFixed(2) : 0
             this.accountCount = res.data.data.accountInfo.accountCount || 0
             this.consumeDays = res.data.data.accountInfo.consumeDays || 0
             this.todayConsume = res.data.data.accountInfo.todayConsume || 0
@@ -267,7 +267,7 @@ export default {
             this.keywordIdeaNumber = res.data.data.diagnosisKeyword.keywordIdeaNumber
             this.keywordRankNumber = res.data.data.diagnosisKeyword.keywordRankNumber
 
-            this.groupPauseNumber = res.data.data.diagnosisGroup.groupPauseNumber
+            this.groupTotalInvalidNumber = res.data.data.diagnosisGroup.groupTotalInvalidNumber
             this.groupInvalidRate = res.data.data.diagnosisGroup.groupInvalidRate
             this.groupInvalidKeywordNumber = res.data.data.diagnosisGroup.groupInvalidKeywordNumber
             this.groupInvalidIdeaNumber = res.data.data.diagnosisGroup.groupInvalidIdeaNumber
